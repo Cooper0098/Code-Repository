@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    printf("hallo11111111111111111111111111111111111111");
+    printf("hallo11111111111111111111牛牛111111111111111111");
     printf("aksj");
     return 0;
 }
