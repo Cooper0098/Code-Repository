@@ -1,5 +1,5 @@
-git add .
+git add . //第一
 
-git commit -m "提交说明"      //importance
+git commit -m "提交说明"      // 第二 importance
 
 git pull origin main
