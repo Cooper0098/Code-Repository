@@ -2,4 +2,4 @@ git add .
 
 git commit -m "提交说明"      //importance
 
-git pull
+git pull origin main 
