@@ -31,7 +31,8 @@ void han(int n, char a, char b, char c)
 int main()
 {
     int n;
-    cin >> n;
+    cout << "请输入圆盘数:" << endl;
+    cin >>  n;
     han(n, 'A', 'B', 'C');
     printf("一共移动了%d步", cont);
     return 0;

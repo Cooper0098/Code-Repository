@@ -29,7 +29,8 @@ int main()
     }
 
     // 对每个字符串进行全排列
-    for (const auto& str : strings) {
+    for (const auto& str : strings) 
+    {
         vector<string> result;
         permute(str, result);
         cout << "全排列结果：" << endl;
