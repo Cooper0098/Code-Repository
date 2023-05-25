@@ -21,7 +21,7 @@ void permute(string &str, int startIndex)
     {
         swap(str[startIndex], str[i]);
         permute(str, startIndex + 1);
-        swap(str[startIndex], str[i]);
+        swap(str[startIndex], str[i]);  //递归排序
     }
 }
 
@@ -39,14 +39,14 @@ int main()
             break;
         }
         strings.push_back(input);
-    }
+    }//取字符串
 
     // 对每个字符串进行全排列
     cout << "下面是全排列结果:" << endl;
     for (string &str : strings)
     {
         permute(str, 0);
-        printf("一共有%d种排列组合", n);
+        printf("一共有%d种排列组合\n", n);
     }
     return 0;
 }
