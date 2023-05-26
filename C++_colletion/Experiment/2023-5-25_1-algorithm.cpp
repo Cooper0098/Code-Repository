@@ -16,7 +16,7 @@ int find(int x)
 {
     if (path[x] != x)
     {
-            path[x] = find(path[x]);
+        path[x] = find(path[x]);
     }
     return path[x];
 }

@@ -4,10 +4,10 @@
 
 using namespace std;
 
-const int N = 1000000;
+const int N = 100000; // const 是一个关键字，用于声明常量。通过使用 const 关键字，可以将变量标记为不可修改的，即其值在声明后不能被修改。
 
-int p[N];
-int n, m;
+int p[N]; // 声明了一个整型数组 p，用于存储每个元素的父节点。
+int n, m; // 分别表示并查集的元素数量和操作次数
 
 int find(int x) // 返回x的祖宗节点 + 路径压缩
 {
@@ -49,4 +49,5 @@ int main()
             }
         }
     }
+    return 0;
 }
