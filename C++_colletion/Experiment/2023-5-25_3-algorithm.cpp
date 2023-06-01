@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
+using namespace std;//贪心求解背包问题
 
 struct Item
 {
