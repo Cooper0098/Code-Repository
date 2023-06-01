@@ -1,44 +1,51 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
 #include <vector>
+#include <algorithm>
+#include <sstream>
+#include <string>
 
 using namespace std;
+int p[1000000];
 
-void permute(string str, vector<string>& permutations)
+int find(int x)
 {
-    sort(str.begin(), str.end());  // 排序输入字符串
-
-    do {
-        permutations.push_back(str);
-    } while (next_permutation(str.begin(), str.end()));
+    if (p[x] != x)
+    {
+        p[x] = find(p[x]);
+    }
+    else 
+    return p[x];
 }
+
+struct Data
+{
+    int a, b, c;
+
+    // 自定义比较函数，按最后一个数的值进行升序排序
+    bool operator<(const Data &other) const
+    {
+        return c < other.c;
+    }
+};
+
 
 int main()
 {
-    vector<string> strings;
-    string input;
-
-    cout << "请输入:" << endl;
-    while (true) {
-        getline(cin, input);
-        if (input.empty()) {
-            break;
-        }
-        strings.push_back(input);
-    }
-
-    // 对每个字符串进行全排列
-    for (const auto& str : strings) 
+    vector<Data> data;
+    string line;
+    while (getline(cin, line) && line != "end")
     {
-        vector<string> result;
-        permute(str, result);
-        cout << "全排列结果：" << endl;
-        for (const auto& permutation : result) {
-            cout << permutation << endl;
+        istringstream iss(line);
+        Data d;
+        if (iss >> d.a >> d.b >> d.c)
+        {
+            data.push_back(d);
         }
-        cout << endl;
     }
-
-    return 0;
+    sort(data.begin(), data.end());
 }
+
+
+
+
+
