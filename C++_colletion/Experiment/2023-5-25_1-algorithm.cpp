@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdio>
-#include <vector>
+#include <vector> 
 
 // 带有压缩规则和加权规则的Find和Union算法
 // 并查集
