@@ -1,65 +1,109 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-const int INF = 1e9; // 无穷大值，表示两个顶点之间没有边
+// 获取斐波那契数列中第n个数的值
+int fibonacci(int n)
+{
+    if (n <= 1)
+        return n;
+
+    int a = 0;
+    int b = 1;
+    int c;
+
+    for (int i = 2; i <= n; i++)
+    {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+
+    return b;
+}
+
+// 斐波那契二分检索
+int fibonacciBinarySearch(const vector<int> &arr, int target)
+{
+    int n = arr.size();//n为数组的大小
+
+    // 查找斐波那契数列中最接近或稍大于等于n的数
+    int fibN = 0;
+    while (fibonacci(fibN) < n)
+    {
+        fibN++;
+    }
+
+    int offset = -1;   // 记录偏移量
+    int left = 0;      // 左边界
+    int right = n - 1; // 右边界
+
+    while (fibN > 1)
+    {
+        int mid = left + fibonacci(fibN - 2); // 计算中间位置
+
+        // 如果中间元素大于目标元素，则在左侧继续查找
+        if (arr[mid] > target)
+        {
+            fibN -= 1;       // 斐波那契数列向前移动
+            right = mid - 1; // 更新右边界
+        }
+        // 如果中间元素小于目标元素，则在右侧继续查找
+        else if (arr[mid] < target)
+        {
+            fibN -= 2;      // 斐波那契数列向前移动
+            left = mid + 1; // 更新左边界
+            offset = mid;   // 记录偏移量
+        }
+        // 目标元素与中间元素相等，找到目标元素
+        else
+        {
+            return mid;
+        }
+    }
+
+    // 对剩余的两个元素进行判断
+    if (fibonacci(1) == 1 && arr[left] == target)
+    {
+        return left;
+    }
+    else if (fibonacci(0) == 0 && arr[right] == target)
+    {
+        return right;
+    }
+
+    // 目标元素不存在，返回-1
+    return -1;
+}
 
 int main()
 {
-    int n, m;
-    cin >> n >> m; // 输入顶点数量和边的数量
+    int n;
+    cout << "Enter the number of elements: ";
+    cin >> n;
 
-    vector<vector<int>> graph(n, vector<int>(n, INF)); // 创建邻接矩阵，初始化为无穷大
-
-    // 输入每条边的信息，并更新邻接矩阵
-    for (int i = 0; i < m; i++)
-    {
-        int u, v, weight;
-        cin >> u >> v >> weight;
-        graph[u - 1][v - 1] = graph[v - 1][u - 1] = weight; // 无向图，更新对称位置
-    }
-
-    // Prim's 算法求解最小生成树
-    vector<bool> visited(n, false); // 记录顶点是否被访问过
-    vector<int> dist(n, INF);       // 记录顶点到最小生成树的距离
-    vector<int> parent(n, -1);      // 记录顶点的父节点
-    dist[0] = 0;                    // 选择第一个顶点作为起点
-
+    vector<int> arr(n);
+    cout << "Enter the elements in sorted order: ";
     for (int i = 0; i < n; i++)
     {
-        int u = -1;
-        for (int j = 0; j < n; j++)
-        {
-            if (!visited[j] && (u == -1 || dist[j] < dist[u]))
-            {
-                u = j; // 找到距离最小的未访问顶点
-            }
-        }
-
-        visited[u] = true; // 将该顶点标记为已访问
-
-        // 更新相邻顶点的距离和父节点
-        for (int v = 0; v < n; v++)
-        {
-            if (!visited[v] && graph[u][v] != INF && graph[u][v] < dist[v])
-            {
-                dist[v] = graph[u][v];
-                parent[v] = u;
-            }
-        }
+        cin >> arr[i];
     }
 
-    // 输出最小生成树的边
-    cout << endl;
-    int con = 0;
-    for (int i = 1; i < n; i++)
+    int target;
+    cout << "Enter the target element to search: ";
+    cin >> target;
+
+    int index = fibonacciBinarySearch(arr, target);
+
+    if (index != -1)
     {
-        cout << parent[i] + 1 << " " << i + 1 << " " << graph[i][parent[i]] << endl;
-        con = graph[i][parent[i]] + con;
+        cout << "Element " << target << " found at index " << index << endl;
     }
-    cout <<"生成树的权值之和:" << con;
+    else
+    {
+        cout << "Element " << target << " not found in the array" << endl;
+    }
 
     return 0;
 }
