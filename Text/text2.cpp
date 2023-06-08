@@ -1,88 +1,69 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <sstream>
-#include <string>
 
 using namespace std;
-int p[1000000];
 
-int fibonaci(int n)
+// 定义二叉树节点的结构体
+struct Node
 {
-    if (n <= 1)
-    {
-        return n;
-    }
-    else
-    {
-        int a = 0;
-        int b = 1;
-        int c;
-        for (int i = 2; i <= n; i++)
-        {
-            c = a + b;
-            a = b;
-            b = c;
-        }
-        return b;
-    }
+    int value;
+    Node *left;
+    Node *right;
+
+    Node(int val) : value(val), left(nullptr), right(nullptr) {}
+};
+
+// 辅助函数：构建二叉搜索树
+Node *buildBST(const vector<int> &postorder, int start, int end)
+{
+    if (start > end)
+        return nullptr;
+
+    // 创建根节点
+    int rootValue = postorder[end];
+    Node *root = new Node(rootValue);
+
+    // 在后序遍历序列中找到左子树和右子树的分界点
+    int divideIndex = start;
+    while (divideIndex < end && postorder[divideIndex] < rootValue)
+        divideIndex++;
+
+    // 递归构建左子树和右子树
+    root->left = buildBST(postorder, start, divideIndex - 1);
+    root->right = buildBST(postorder, divideIndex, end - 1);
+
+    return root;
+}
+
+// 先序遍历二叉树
+void preorderTraversal(Node *root)
+{
+    if (root == nullptr)
+        return;
+
+    cout << root->value << " ";
+    preorderTraversal(root->left);
+    preorderTraversal(root->right);
 }
 
 int main()
 {
     int n;
+    cout << "请输入后序遍历序列的元素数量: ";
     cin >> n;
-    cout<<fibonaci(n);
-    
-}
 
-
-
-
-
-
-
-int binSearch(const vector<int> &arr, int target)
-{
-    int n = arr.size();        // 数组的大小
-    int fibn = 0;              // 斐波那契数列中的索引
-    while (fibonaci(fibn) < n) // 找到大于等于数组大小的最小斐波那契数
+    vector<int> postorder(n);
+    cout << "请输入后序遍历序列的元素: ";
+    for (int i = 0; i < n; i++)
     {
-        fibn++;
+        cin >> postorder[i];
     }
 
-    int offset = -1;   // 偏移量
-    int left = 0;      // 左边界
-    int right = n - 1; // 右边界
-    while (fibn > 1)   // 斐波那契数列索引大于1时继续循环
-    {
-        int mid = left + fibonaci(fibn - 2); // 计算中间位置
-        if (arr[mid] > target)               // 如果中间元素大于目标元素
-        {
-            fibn = fibn - 1; // 更新斐波那契数列索引为前一个数
-            right = mid - 1; // 更新右边界为中间位置的前一个位置
-        }
-        else if (arr[mid] < target) // 如果中间元素小于目标元素
-        {
-            fibn = fibn - 2; // 更新斐波那契数列索引为前两个数
-            left = mid + 1;  // 更新左边界为中间位置的后一个位置
-            offset = mid;    // 记录中间位置，用于最后剩余两个元素的判断
-        }
-        else // 中间元素等于目标元素，找到目标元素，返回索引
-        {
-            return mid;
-        }
-    }
+    Node *root = buildBST(postorder, 0, n - 1);
 
-    // 对剩余的两个元素进行判断
-    if (fibonaci(1) == 1 && arr[left] == target) // 如果斐波那契数列第2个数为1且左边界元素等于目标元素
-    {
-        return left; // 返回左边界索引
-    }
-    else if (fibonaci(0) == 0 && arr[right] == target) // 如果斐波那契数列第1个数为0且右边界元素等于目标元素
-    {
-        return right; // 返回右边界索引
-    }
+    cout << "先序遍历序列为: ";
+    preorderTraversal(root);
+    cout << endl;
 
-    return -1; // 目标元素不存在于数组中，返回-1
+    return 0;
 }

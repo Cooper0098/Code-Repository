@@ -3,106 +3,72 @@
 
 using namespace std;
 
-// 获取斐波那契数列中第n个数的值
-int fibonacci(int n)
+// 三分检索算法
+int ternarySearch(const vector<int> &arr, int target)
 {
-    if (n <= 1)
-        return n;
+    int n = arr.size();
+    int left = 0;
+    int right = n - 1;
 
-    int a = 0;
-    int b = 1;
-    int c;
-
-    for (int i = 2; i <= n; i++)
+    while (left <= right)
     {
-        c = a + b;
-        a = b;
-        b = c;
-    }
+        int mid1 = left + (right - left) / 3;  // 第一个中间位置
+        int mid2 = right - (right - left) / 3; // 第二个中间位置
 
-    return b;
-}
-
-// 斐波那契二分检索
-int fibonacciBinarySearch(const vector<int> &arr, int target)
-{
-    int n = arr.size();//n为数组的大小
-
-    // 查找斐波那契数列中最接近或稍大于等于n的数
-    int fibN = 0;
-    while (fibonacci(fibN) < n)
-    {
-        fibN++;
-    }
-
-    int offset = -1;   // 记录偏移量
-    int left = 0;      // 左边界
-    int right = n - 1; // 右边界
-
-    while (fibN > 1)
-    {
-        int mid = left + fibonacci(fibN - 2); // 计算中间位置
-
-        // 如果中间元素大于目标元素，则在左侧继续查找
-        if (arr[mid] > target)
-        {
-            fibN -= 1;       // 斐波那契数列向前移动
-            right = mid - 1; // 更新右边界
+        if (arr[mid1] == target)
+        { // 目标元素在第一个中间位置
+            return mid1;
         }
-        // 如果中间元素小于目标元素，则在右侧继续查找
-        else if (arr[mid] < target)
-        {
-            fibN -= 2;      // 斐波那契数列向前移动
-            left = mid + 1; // 更新左边界
-            offset = mid;   // 记录偏移量
+
+        if (arr[mid2] == target)
+        { // 目标元素在第二个中间位置
+            return mid2;
         }
-        // 目标元素与中间元素相等，找到目标元素
+
+        if (target < arr[mid1])
+        { // 目标元素在第一个中间位置的左侧
+            right = mid1 - 1;
+        }
+        else if (target > arr[mid2])
+        { // 目标元素在第二个中间位置的右侧
+            left = mid2 + 1;
+        }
         else
-        {
-            return mid;
+        { // 目标元素在两个中间位置之间
+            left = mid1 + 1;
+            right = mid2 - 1;
         }
     }
 
-    // 对剩余的两个元素进行判断
-    if (fibonacci(1) == 1 && arr[left] == target)
-    {
-        return left;
-    }
-    else if (fibonacci(0) == 0 && arr[right] == target)
-    {
-        return right;
-    }
-
-    // 目标元素不存在，返回-1
-    return -1;
+    return -1; // 目标元素未找到
 }
 
 int main()
 {
     int n;
-    cout << "Enter the number of elements: ";
+    cout << "请输入元素数量: ";
     cin >> n;
 
     vector<int> arr(n);
-    cout << "Enter the elements in sorted order: ";
-    for (int i = 0; i < n; i++)
+    cout << "请输入元素值: ";
+    for (int i = 0; i < n; ++i)
     {
         cin >> arr[i];
     }
 
     int target;
-    cout << "Enter the target element to search: ";
+    cout << "输入要搜索的目标元素: ";
     cin >> target;
 
-    int index = fibonacciBinarySearch(arr, target);
+    int index = ternarySearch(arr, target);
 
     if (index != -1)
     {
-        cout << "Element " << target << " found at index " << index << endl;
+        cout << "元素 " << target << " 的下标为: " << index << endl;
     }
     else
     {
-        cout << "Element " << target << " not found in the array" << endl;
+        cout << "元素 " << target << " 不在数组中" << endl;
     }
 
     return 0;
