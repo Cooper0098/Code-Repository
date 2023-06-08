@@ -4,11 +4,8 @@
 
 using namespace std;//贪心求解背包问题
 
-struct Item
-{
-    int weight;
-    int profit;
-};
+struct Item {int weight;int profit;};
+
 
 bool compare(Item a, Item b)
 {
@@ -32,7 +29,7 @@ double knapsack(int n, int capacity, vector<int> &weights, vector<int> &profits)
     }
 
     // 按照单位重量的利润比率进行排序
-    sort(items.begin(), items.end(), compare);
+    sort(items.begin(), items.end(), compare); // 在 C++ 中，sort 是一个标准库函数，位于 <algorithm> 头文件中。它用于对容器中的元素进行排序。sort 函数可以对各种容器（例如数组、向量等）中的元素进行排序，使用的是快速排序或者类似的排序算法。
 
     double totalProfit = 0.0;
     int currentWeight = 0;
