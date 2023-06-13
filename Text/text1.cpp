@@ -3,73 +3,77 @@
 
 using namespace std;
 
-// 三分检索算法
-int ternarySearch(const vector<int> &arr, int target)
+// 二叉树节点的定义
+struct TreeNode
 {
-    int n = arr.size();
-    int left = 0;
-    int right = n - 1;
+    int val;
+    TreeNode *left;
+    TreeNode *right;
 
-    while (left <= right)
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+// 先序遍历二叉树，并输出节点值
+void preorderTraversal(TreeNode *root, vector<int> &result)
+{
+    if (root == nullptr)
     {
-        int mid1 = left + (right - left) / 3;  // 第一个中间位置
-        int mid2 = right - (right - left) / 3; // 第二个中间位置
-
-        if (arr[mid1] == target)
-        { // 目标元素在第一个中间位置
-            return mid1;
-        }
-
-        if (arr[mid2] == target)
-        { // 目标元素在第二个中间位置
-            return mid2;
-        }
-
-        if (target < arr[mid1])
-        { // 目标元素在第一个中间位置的左侧
-            right = mid1 - 1;
-        }
-        else if (target > arr[mid2])
-        { // 目标元素在第二个中间位置的右侧
-            left = mid2 + 1;
-        }
-        else
-        { // 目标元素在两个中间位置之间
-            left = mid1 + 1;
-            right = mid2 - 1;
-        }
+        return;
     }
 
-    return -1; // 目标元素未找到
+    result.push_back(root->val);            // 输出当前节点的值
+    preorderTraversal(root->left, result);  // 递归遍历左子树
+    preorderTraversal(root->right, result); // 递归遍历右子树
+}
+
+// 遍历二叉树，找到所有叶子节点
+void findLeafNodes(TreeNode *root, vector<int> &leafNodes)
+{
+    if (root == nullptr)
+    {
+        return;
+    }
+
+    if (root->left == nullptr && root->right == nullptr)
+    {
+        leafNodes.push_back(root->val); // 当前节点是叶子节点
+        return;
+    }
+
+    findLeafNodes(root->left, leafNodes);  // 递归遍历左子树
+    findLeafNodes(root->right, leafNodes); // 递归遍历右子树
 }
 
 int main()
 {
-    int n;
-    cout << "请输入元素数量: ";
-    cin >> n;
+    // 构建二叉树
+    TreeNode *root = new TreeNode(1);
+    root->left = new TreeNode(2);
+    root->right = new TreeNode(3);
+    root->left->left = new TreeNode(4);
+    root->left->right = new TreeNode(5);
+    root->right->left = new TreeNode(6);
+    root->right->right = new TreeNode(7);
 
-    vector<int> arr(n);
-    cout << "请输入元素值: ";
-    for (int i = 0; i < n; ++i)
+    // 先序遍历并输出结果
+    vector<int> preorderResult;
+    preorderTraversal(root, preorderResult);
+    cout << "先序遍历序列：";
+    for (int val : preorderResult)
     {
-        cin >> arr[i];
+        cout << val << " ";
     }
+    cout << endl;
 
-    int target;
-    cout << "输入要搜索的目标元素: ";
-    cin >> target;
-
-    int index = ternarySearch(arr, target);
-
-    if (index != -1)
+    // 查找叶子节点并输出结果
+    vector<int> leafNodes;
+    findLeafNodes(root, leafNodes);
+    cout << "叶子节点：";
+    for (int val : leafNodes)
     {
-        cout << "元素 " << target << " 的下标为: " << index << endl;
+        cout << val << " ";
     }
-    else
-    {
-        cout << "元素 " << target << " 不在数组中" << endl;
-    }
+    cout << endl;
 
     return 0;
 }

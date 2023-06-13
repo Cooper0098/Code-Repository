@@ -3,67 +3,71 @@
 
 using namespace std;
 
-// 定义二叉树节点的结构体
-struct Node
+// 动态规划解决0-1背包问题
+void knapsack(int M, const vector<int> &P, const vector<int> &W) // m是背包容量, p是物品的价值, w是物品的重量
 {
-    int value;
-    Node *left;
-    Node *right;
+    int n = P.size();//n是物品个数
 
-    Node(int val) : value(val), left(nullptr), right(nullptr) {}
-};
+    // 创建动态规划表格
+    vector<vector<int>> dp(n + 1, vector<int>(M + 1, 0));
 
-// 辅助函数：构建二叉搜索树
-Node *buildBST(const vector<int> &postorder, int start, int end)
-{
-    if (start > end)
-        return nullptr;
+    // 填充dp动态规划表格
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= M; j++)
+        {
+            if (W[i - 1] <= j)
+            {
+                dp[i][j] = max(dp[i - 1][j], P[i - 1] + dp[i - 1][j - W[i - 1]]);
+            }
+            else
+            {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
 
-    // 创建根节点
-    int rootValue = postorder[end];
-    Node *root = new Node(rootValue);
+    // 输出最优解
+    cout << "最优解：" << dp[n][M] << endl;
 
-    // 在后序遍历序列中找到左子树和右子树的分界点
-    int divideIndex = start;
-    while (divideIndex < end && postorder[divideIndex] < rootValue)
-        divideIndex++;
-
-    // 递归构建左子树和右子树
-    root->left = buildBST(postorder, start, divideIndex - 1);
-    root->right = buildBST(postorder, divideIndex, end - 1);
-
-    return root;
-}
-
-// 先序遍历二叉树
-void preorderTraversal(Node *root)
-{
-    if (root == nullptr)
-        return;
-
-    cout << root->value << " ";
-    preorderTraversal(root->left);
-    preorderTraversal(root->right);
+    // 输出解向量
+    cout << "解向量：";
+    int i = n, j = M;
+    vector<int> solution;
+    while (i > 0 && j > 0)
+    {
+        if (dp[i][j] != dp[i - 1][j])
+        {
+            solution.push_back(1);
+            j -= W[i - 1];
+        }
+        else
+        {
+            solution.push_back(0);
+        }
+        i--;
+    }
+    for (int k = solution.size() - 1; k >= 0; k--)
+    {
+        cout << solution[k] << " ";
+    }
+    cout << endl;
 }
 
 int main()
 {
-    int n;
-    cout << "请输入后序遍历序列的元素数量: ";
-    cin >> n;
+    int M, n;
+    cout << "请输入背包容量 M 和物品数量 n:";
+    cin >> M >> n;
 
-    vector<int> postorder(n);
-    cout << "请输入后序遍历序列的元素: ";
+    vector<int> P(n), W(n);
+    cout << "请依次输入物品的价值 P 和重量 W:" << endl;
     for (int i = 0; i < n; i++)
     {
-        cin >> postorder[i];
+        cin >> P[i] >> W[i];
     }
 
-    Node *root = buildBST(postorder, 0, n - 1);
-
-    cout << "先序遍历序列为: ";
-    preorderTraversal(root);
-    cout << endl;
+    knapsack(M, P, W);
 
     return 0;
 }
