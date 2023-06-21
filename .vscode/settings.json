@@ -60,7 +60,8 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "unordered_set": "cpp"
     },
     "python.testing.unittestArgs": [
         "-v",

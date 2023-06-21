@@ -4,7 +4,7 @@
 #include <vector>
 #include <unordered_set>
 
-using namespace std;
+using namespace std;//回溯法
 
 void backtrack(vector<int> &nums, int target, vector<int> &subset, int start, int sum)
 {
@@ -21,7 +21,7 @@ void backtrack(vector<int> &nums, int target, vector<int> &subset, int start, in
         cout << "   其对应的解向量：";
         for (int i = 0; i < nums.size(); i++)
         {
-            if ( find(subset.begin(), subset.end(), nums[i]) != subset.end())
+            if (find(subset.begin(), subset.end(), nums[i]) != subset.end())
             {
                 cout << "1 ";
             }
