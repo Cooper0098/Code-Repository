@@ -18,7 +18,7 @@ vector<vector<int>> graph = {
 
 void deepfirst(int node, unordered_set<int> &visit) // unordered_set存储唯一的元素集合
 {
-    visit.insert(node);  // 将当前节点标记为已访问
+    visit.insert(node );  // 将当前节点标记为已访问
     cout << node << ' '; // 输出当前节点
 
     // 遍历当前节点的邻居节点

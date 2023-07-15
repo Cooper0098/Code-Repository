@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <vector>
 
-using namespace std; //  排序数组
+using namespace std; //  快速排序数组
 
 class Solution
 {
