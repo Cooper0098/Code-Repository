@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <vector>
 
-using namespace std; //  快速排序数组
+using namespace std; //  快速排序数组 最坏情况t =  n^2
 
 class Solution
 {
