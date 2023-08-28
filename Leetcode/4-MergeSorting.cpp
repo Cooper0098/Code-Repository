@@ -84,7 +84,7 @@ void msort(int arr[], int tempArr[], int left, int right)//划分
 
 
 
-void merge_sort(int arr[], int n) // 归并排序入口    1111111111111111111111111
+void merge_sort(int arr[], int n) // 归并排序入口    
 {
     int *tempArr = new int[n];
     if (tempArr) // 辅助数组
