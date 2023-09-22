@@ -40,4 +40,7 @@ prediction = model.predict(test_text_sequence)[0][0]
 if prediction >= 0.5:
     print("Positive sentiment")
 else:
-    print("Negative sentiment")
+    print("Negative sentiment")   
+
+
+    
