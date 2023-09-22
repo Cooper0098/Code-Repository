@@ -50,17 +50,17 @@ int main()
     while(m--)
     {
         int k, x;
-        char op;
+        char op[2];
 
         cin >> op;
 
-        if (op == 'H')
+        if (*op == 'H')
         {
             cin >> x;
             add_head(x);
         }
 
-        else if(op== 'D')
+        else if(*op== 'D')
         {
             cin >> k;
             if (!k)

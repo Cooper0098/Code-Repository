@@ -1,8 +1,4 @@
-a= 1
-b = 5
-print(a+b)
-
-
-for i in range(5):
-    print(i)
-    
+a =1414
+b = 1444
+print(a*b)
+print('good morning')
