@@ -7,7 +7,8 @@
 #include <cstdlib>
 #include <cstdio>
 
-using namespace std; // 求质数 质数因子算法
+using namespace std; // 求质数 质数因子算法 
+
 
 
 
@@ -30,5 +31,5 @@ int main()
         }
     }
 
-    return 0;
+    return 0; 
 }

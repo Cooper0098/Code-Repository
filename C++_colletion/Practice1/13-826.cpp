@@ -10,7 +10,7 @@
 using namespace std; // 实现一个单链表，链表初始为空，支持三种操作：向链表头插入一个数；
 // 删除第 k个插入的数后面的数；
 // 在第 k个插入的数后插入一个数。现在要对该链表进行m次操作，进行完所有操作后，从头到尾输出整个链表。
-const int N = 100203;
+const int N = 100203;  
 
 int head, e[N], ne[N], idx;
 int cnt = 0;
@@ -21,7 +21,7 @@ void init()
     idx = 0;
 }
 
-void insert(int k, int x) // 将x加到下标是k的点后面
+void insert(int k, int x) //  将x加到下标是k的点后面
 {
     e[idx] = x;
     ne[idx] = ne[k];

@@ -1,75 +1,90 @@
 #include <iostream>
-
 using namespace std;
 
-const int N = 100010;
-
-// head 表示头结点的下标
-// e[i] 表示节点i的值
-// ne[i] 表示节点i的next指针是多少
-// idx 存储当前已经用到了哪个点
-int head, e[N], ne[N], idx;
-
-// 初始化
-void init()
+// 合并两个已排序的子数组
+void merge(int arr[], int left, int mid, int right)
 {
-    head = -1;
-    idx = 0;
-}
+    int i, j, k;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
 
-// 将x插到头结点
-void add_to_head(int x)
-{
-    e[idx] = x, ne[idx] = head, head = idx++;
-}
+    // 创建临时数组
+    int L[n1], R[n2];
 
-// 将x插到下标是k的点后面
-void add(int k, int x)
-{
-    e[idx] = x, ne[idx] = ne[k], ne[k] = idx++;
-}
+    // 复制数据到临时数组 L 和 R
+    for (i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
 
-// 将下标是k的点后面的点删掉
-void remove(int k)
-{
-    ne[k] = ne[ne[k]];
-}
-
-int main()
-{
-    int m;
-    cin >> m;
-
-    init();
-
-    while (m--)
+    // 归并临时数组到 arr[]
+    i = 0;    // 初始化第一个子数组的索引
+    j = 0;    // 初始化第二个子数组的索引
+    k = left; // 初始化合并子数组的索引
+    while (i < n1 && j < n2)
     {
-        int k, x;
-        char op;
-
-        cin >> op;
-        if (op == 'H')
+        if (L[i] <= R[j])
         {
-            cin >> x;
-            add_to_head(x);
-        }
-        else if (op == 'D')
-        {
-            cin >> k;
-            if (!k)
-                head = ne[head];
-            else
-                remove(k - 1);
+            arr[k] = L[i];
+            i++;
         }
         else
         {
-            cin >> k >> x;
-            add(k - 1, x);
+            arr[k] = R[j];
+            j++;
         }
+        k++;
     }
 
-    for (int i = head; i != -1; i = ne[i])
-        cout << e[i] << ' ';
+    // 复制 L[] 的剩余元素
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    // 复制 R[] 的剩余元素
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+// 归并排序主函数
+void mergeSort(int arr[], int left, int right)
+{
+    if (left < right)
+    {
+        int mid = left + (right - left) / 2;
+
+        // 分割数组并递归调用 mergeSort()
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        // 合并两个子数组
+        merge(arr, left, mid, right);
+    }
+}
+
+// 测试
+int main()
+{
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int arrSize = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "原始数组：";
+    for (int i = 0; i < arrSize; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+
+    mergeSort(arr, 0, arrSize - 1);
+
+    cout << "排序后的数组：";
+    for (int i = 0; i < arrSize; i++)
+        cout << arr[i] << " ";
     cout << endl;
 
     return 0;
