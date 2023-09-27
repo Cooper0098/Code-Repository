@@ -69,7 +69,7 @@ void mergeSort(int arr[], int left, int right)
     }
 }
 
-// 测试
+// 测试 //测试
 int main()
 {
     int arr[] = {12, 11, 13, 5, 6, 7};
