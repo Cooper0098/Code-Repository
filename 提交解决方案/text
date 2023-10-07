@@ -1,6 +1,6 @@
 git add . //第一
 
-git commit -m "提交说明"      // 第二 importance
+git commit -m ""      // 第二 importance
 
 git push
 
