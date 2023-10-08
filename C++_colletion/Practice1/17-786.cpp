@@ -6,20 +6,51 @@ using namespace std; // 快速选择算法           给定一个长度为 n的�
 
 
 
-const int N = 1000000;
-int x;
+const int N = 1000010;
+
+int n, k;
 int q[N];
 
 
-void quick_select(int q[],int l,int r)
+int quick_select(int l,int r,int k)
 {
-    
 
-}
+    if (l== r)
+    {
+        return q[l];
+    }
+
+
+    int x = q[l], i = l - 1, j = r + 1;
+    while (i<j)
+    {
+        do
+            i++;
+        while (q[i] < x);
+        do
+            j--;
+        while (q[j] > x);
+        if (i < j)
+        {
+            swap(q[i], q[j]);
+        }
+            
+    }
+    int sl = j - l + 1; // 修改此行，计算小于等于x的元素个数 注意边界范围!!!!
+    if (k<=sl)
+    {
+        return quick_select(l, j, k);
+    }
+    else
+    {
+        return quick_select(j+1, r, k-sl);
+    }
+                       
+} 
 
 int main()
 {
-    int n, k;
+  
     scanf("%d%d", &n, &k);
 
     for (int i = 0; i < n; i++)
@@ -27,9 +58,9 @@ int main()
         scanf("%d", &q[i]);
     }
 
-    int result = quick_select(q, 0, n - 1, k);
 
-    printf("%d", result);
+
+    printf("%d", quick_select(0, n - 1, k));
 
     return 0;
 }
