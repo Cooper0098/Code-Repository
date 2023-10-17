@@ -1,20 +1,27 @@
-#define _CRT_SECURE_NO_WARNINGS 1
 #include <iostream>
-
-#include <cmath>
-#include <algorithm>
-#include <chrono>
-
-#include <cstdlib>
-#include <cstdio>
 
 using namespace std;
 
 int main()
 {
-    int a , b;
-    a = 5;
-    b = 2;
-    cout << a / b;
+    int n, m = 0;
+    cin >> n;
+    if (n < 2)
+    {
+        cout << 0;
+    }
+
+    else
+    {
+        for (int i = 2; i <= n; i++)
+        {
+            if (i % 2 == 0 && i % 3 != 0)
+            {
+                m++;
+            }
+        }
+        cout << m;
+    }
+
     return 0;
 }
