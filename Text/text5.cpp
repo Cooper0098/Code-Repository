@@ -1,59 +1,19 @@
 #include <iostream>
-#include <cstdio>
 #include <vector>
-
-using namespace std;
-
-const int N = 1000010;
-
-int n, k;
-int q[N];
-
-int quick_select(int l, int r, int k)
-{
-    if (l == r)
-    {
-        return q[l];
-    }
-
-    int x = q[l], i = l - 1, j = r + 1;
-    while (i < j)
-    {
-        do
-        {
-            i++;
-        } while (q[i] < x);
-        do
-        {
-            j--;
-        } while (q[j] > x);
-        if (i < j)
-        {
-            swap(q[i], q[j]);
-        }
-    }
-    int sl = j - l + 1; // 修改此行，计算小于等于x的元素个数
-
-    if (k <= sl)
-    {
-        return quick_select(l, j, k);
-    }
-    else
-    {
-        return quick_select(j + 1, r, k - sl); // 修改此行，减去小于等于x的元素个数
-    }
-}
 
 int main()
 {
-    scanf("%d%d", &n, &k);
+    std::vector<int> numbers; // 创建一个整数向量
 
-    for (int i = 0; i < n; i++)
+    numbers.push_back(10); // 向向量中添加元素
+    numbers.push_back(20);
+    numbers.push_back(30);
+
+    // 打印向量中的元素
+    for (int i = 0; i < numbers.size(); i++)
     {
-        scanf("%d", &q[i]);
+        std::cout << numbers[i] << " ";
     }
-
-    printf("%d", quick_select(0, n - 1, k));
 
     return 0;
 }
