@@ -2,12 +2,12 @@
 #include<vector>
 using namespace std; // 高精度加法   给定两个正整数（不含前导 0），计算它们的和。
 
-const int N = 1e6+10;
+
 
 vector<int> add(vector<int> &A,vector<int> &B)
 {
     vector<int> C;
-    int t = 0;
+    int t = 0;//t是进位
 
     for (int i = 0; i < A.size()|| i < B.size();i++)
     {
@@ -20,12 +20,12 @@ vector<int> add(vector<int> &A,vector<int> &B)
         {
             t += B[i];
         }
-        C.push_back(t % 10);
-        t /= 10;
+        C.push_back(t % 10);//t没有赋值,只是求模
+        t /= 10;//判断是否进位
         
     }
 
-    if (t) // 变量t的值不为0，执行代码
+    if (t) // 检查最高一位,变量t的值不为0，执行代码
         C.push_back(1);
     return C;
 }
