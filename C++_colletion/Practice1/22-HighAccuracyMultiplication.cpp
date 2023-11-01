@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
-using namespace std;
+using namespace std;// 定义一个函数，用于实现大整数乘法 
 
-// 定义一个函数，用于实现大整数乘法
+
+
 vector<int> mul(vector<int> &A, int b)
 {
     vector<int> C; // 存储乘积的向量

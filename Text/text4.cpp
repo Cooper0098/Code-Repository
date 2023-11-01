@@ -1,60 +1,77 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <map>
-
+#include<iostream>
+#include<cstring>
+#include<algorithm>
+#include<stack>
+#include<unordered_map>
 using namespace std;
+
+//双栈
+stack<int>num;
+stack<char>op;
+
+//求值函数,使用末尾的运算符操作末尾的两个数
+void eval()
+{
+    auto b = num.top(); num.pop();//第二个操作数
+    auto a = num.top(); num.pop();//第一个操作数
+    auto c = op.top(); op.pop();  //运算符
+
+    int x;                        //结果计算(注意顺序)
+    if (c == '+')x = a + b;
+    else if (c == '-')x = a - b;
+    else if (c == '*')x = a * b;
+    else x = a / b;
+    num.push(x);                  //结果入栈
+}
 
 int main()
 {
-    long long n, p;
-    cin >> n >> p;
-    map<long long, vector<tuple<long long, long long, long long>>> t;
-    for (long long i = 0; i < n; i++)
+    //优先级表
+    unordered_map<char, int>pr{ {'+',1},{'-',1},{'*',2},{'/',2} };
+
+    //读入表达式
+    string str;
+    cin >> str;
+
+    //从前往后扫描表达式
+    for (int i = 0; i < str.size(); i++)
     {
-        long long f, s, k;
-        cin >> f >> s >> k;
-        if (t.find(f) == t.end())
+        auto c = str[i];
+        //扫描到数字,使用双指针法一直读入
+        if (isdigit(c))
         {
-            t[f] = {make_tuple(i + 1, s, k)};
+            //j表示扫描到数字的指针
+            int x = 0, j = i;
+            while (j < str.size() && isdigit(str[j]))
+                x = x * 10 + str[j++] - '0';
+            //更新i指针
+            i = j - 1;
+            //数字入栈
+            num.push(x);
         }
+        //左括号直接入栈
+        else if (c == '(')op.push(c);
+        //右括号出现,从右往左计算栈中数据,直到遇见左括号
+        else if (c == ')')
+        {
+            //不断使用eval函数对末尾数字运算
+            while (op.top() != '(')eval();
+            //弹出左括号
+            op.pop();
+        }
+        //扫描到运算符
         else
         {
-            t[f].push_back(make_tuple(i + 1, s, k));
+            //如果栈顶运算符优先级较高,先操作栈顶元素再入栈
+            while (op.size() && pr[op.top()] >= pr[c])eval();
+            //如果栈顶运算符优先级较低,直接入栈
+            op.push(c);
         }
     }
-    long long res = 0;
-    priority_queue<tuple<long long, long long, long long>, vector<tuple<long long, long long, long long>>, greater<tuple<long long, long long, long long>>> pq;
-    auto [f, s, k] = t[0][0];
-    pq.push(make_tuple(k, 1, s));
-    if (p < k)
-    {
-        cout << 0 << endl;
-    }
-    else
-    {
-        while (!pq.empty())
-        {
-            auto [k, node, s] = pq.top();
-            pq.pop();
-            if (p >= k)
-            {
-                p += s;
-                res += 1;
-                if (t.find(node) != t.end())
-                {
-                    for (auto [nod, s, core] : t[node])
-                    {
-                        pq.push(make_tuple(core, nod, s));
-                    }
-                }
-            }
-            else
-            {
-                break;
-            }
-        }
-        cout << res << endl;
-    }
+    //把没有操作完的运算符从右往左操作一遍
+    while (op.size())eval();
+    //栈顶元素为最终答案
+    cout << num.top() << endl;
     return 0;
 }
+
