@@ -25,6 +25,7 @@ int main()
         {
             s[a[j]]--;
             j++;
+          
         }
         res = max(res, i - j + 1);
     }
