@@ -18,6 +18,7 @@ void merge(int arr[], int left, int mid, int right)
         R[j] = arr[mid + 1 + j];
 
     // 归并临时数组到 arr[]
+    
     i = 0;    // 初始化第一个子数组的索引
     j = 0;    // 初始化第二个子数组的索引
     k = left; // 初始化合并子数组的索引

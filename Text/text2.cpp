@@ -3,20 +3,13 @@
 #include <vector>
 using namespace std;
 
-
-
 int main()
 {
-    string s;
-    cin >> s;
-    vector<char> a;
-    for (int i = s.size() - 1; i >= 0;i--)
-    {
-        a.push_back(s[i]);
-   
-    }
-    for (int i = 0; i < s.size();i++)
-        cout << a[i];
+    int a, b;
+    a = 2;
+    b = 345;
+    cout << a * b<<endl; 
+    cout << a +b<<endl;
+    cout <<int ('7'-'0')<<endl;
 
-        return 0;
 }
