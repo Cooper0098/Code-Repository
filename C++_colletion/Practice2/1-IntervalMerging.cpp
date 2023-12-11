@@ -29,19 +29,29 @@ int main()
     }
     sort(nums.begin(), nums.end()); // 对nums中的区间按照起始位置进行排序
 
-    for (auto num : nums)
-    {
-        if (ed < num.first) // 如果当前区间的起始位置大于前一个合并区间的结束位置
+    for(auto num:nums)                   
         {
-            if (ed != -2e9) // 如果不是第一个合并区间
-                res.push_back({st, ed}); // 将前一个合并区间存储到res中
-            st = num.first, ed = num.second; // 更新当前合并区间的起始和结束位置
-        }
-        else if (ed < num.second) // 如果当前区间的结束位置大于前一个合并区间的结束位置
-            ed = num.second; // 更新当前合并区间的结束位置
-    }
+            if(ed<num.first)                            //情况1：两个区间无法合并
+            {
+                if(ed!=-2e9) res.push_back({st,ed}) ;   //区间1放进res数组
+                st=num.first,ed=num.second ;            //维护区间2
+            }
+            //情况2：两个区间可以合并，且区间1不包含区间2，区间2不包含区间1
+            else if(ed<num.second)  
+                ed=num.second ;                         //区间合并
+        }  
+    //(实际上也有情况3：区间1包含区间2，此时不需要任何操作，可以省略)
 
-    res.push_back({st, ed}); // 将最后一个合并区间存储到res中
+    //注：排过序之后，不可能有区间2包含区间1
+
+    
+    if(st != -2e9)
+    res.push_back({st,ed});
+
+    //考虑循环结束时的st,ed变量，此时的st,ed变量不需要继续维护，只需要放进res数组即可。
+    //因为这是最后的一个序列，所以不可能继续进行合并。
+
+
 
     printf("%d", res.size()); // 输出合并后的区间个数
 
