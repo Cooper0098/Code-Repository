@@ -1,23 +1,23 @@
 #include <iostream>
 #include <vector>
 
-using namespace std; // Ö¸ÕëÊÇÊ²Ã´
+using namespace std; // æŒ‡é’ˆæ˜¯ä»€ä¹ˆ
 
 int main()
 {
-    int num = 10; // ÉùÃ÷Ò»¸öÕûÊı±äÁ¿
-    int *ptr;     // ÉùÃ÷Ò»¸öÕûĞÍÖ¸Õë±äÁ¿
+    int num = 10; // å£°æ˜ä¸€ä¸ªæ•´æ•°å˜é‡
+    int *ptr;     // å£°æ˜ä¸€ä¸ªæ•´å‹æŒ‡é’ˆå˜é‡
 
-    // ptr ´æµØÖ·  , *ptr ´æµØÖ·ÉÏµÄÖµ
+    // ptr å­˜åœ°å€  , *ptr å­˜åœ°å€ä¸Šçš„å€¼
 
-    ptr = &num; // ½«±äÁ¿ num µÄµØÖ·¸³Öµ¸øÖ¸Õë ptr
+    ptr = &num; // å°†å˜é‡ num çš„åœ°å€èµ‹å€¼ç»™æŒ‡é’ˆ ptr
 
     cout << "Value of num: " << num << endl;                    // 10
     cout << "Address of num: " << &num << endl;                 // address
     cout << "Value of ptr: " << ptr << endl;                    // address
     cout << "Value at address stored in ptr: " << *ptr << endl; // 10
 
-    *ptr = 20; // ĞŞ¸ÄÖ¸ÕëÖ¸ÏòµÄÄÚ´æÎ»ÖÃµÄÖµ
+    *ptr = 20; // ä¿®æ”¹æŒ‡é’ˆæŒ‡å‘çš„å†…å­˜ä½ç½®çš„å€¼
 
     cout << "Value of num after modification: " << num << endl;
 

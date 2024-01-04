@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 
-using namespace std; // ç»™å®šä¸¤ä¸ªå‡åºæŽ’åºçš„æœ‰åºæ•°ç»? Aå’? Bï¼Œä»¥åŠä¸€ä¸?ç›?æ ‡å€? x; æ•°ç»„ä¸‹æ ‡ä»? 0å¼€å§‹ã€‚è?·ä½ æ±‚å‡ºæ»¡è¶³ A[i]+B[j]=xçš„æ•°å¯? (i,j)       æ•°æ®ä¿è¯æœ‰å”¯ä¸€è§£ã€?
+using namespace std; // ¸ø¶¨Á½¸öÉýÐòÅÅÐòµÄÓÐÐòÊý?? A?? B£¬ÒÔ¼°Ò»????±ê?? x; Êý×éÏÂ±ê?? 0¿ªÊ¼¡£???ÄãÇó³öÂú×ã A[i]+B[j]=xµÄÊý?? (i,j)       Êý¾Ý±£Ö¤ÓÐÎ¨Ò»½â??
 
 const int N = 100100;
 int a[N], b[N];

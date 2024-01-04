@@ -1,6 +1,5 @@
 #include <iostream>
-#include <cstdio>//ÖØĞÂ¿ªÊ¼
-
+#include <cstdio> //é‡æ–°å¼€å§‹
 
 using namespace std;
 int main()
@@ -13,7 +12,7 @@ int main()
     int b = 100;
     for (int i = 0; i < b; i++)
     {
-        printf("%d\n",i);
+        printf("%d\n", i);
     }
-        return 0;
+    return 0;
 }
