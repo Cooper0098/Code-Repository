@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iostream>
 #include <algorithm>
 #include <cstdio>
 #include <vector>
@@ -6,11 +7,10 @@
 #include <iostream>
 using namespace std;
 
-class Solution
+// 最长公共子串   字符串哈希
+
+int main()
 {
-public:
-    string addBinary(string a, string b)
-    {
-        int
-    }
-};
+
+    return 0;
+}

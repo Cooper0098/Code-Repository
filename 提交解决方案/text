@@ -6,3 +6,10 @@ git push
 
 git pull origin main
 
+REM Get-ChildItem | Where-Object{$_.Extension -eq ".exe"}| Remove-Item -Force
+
+del *.exe /q /s
+del a.out /q /s
+del *.o /q /s
+del *.log /q /s
+del tempCodeRunnerFile.c /q /s

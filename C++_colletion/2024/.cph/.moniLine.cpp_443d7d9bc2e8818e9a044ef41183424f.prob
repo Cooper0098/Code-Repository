@@ -1,0 +1,1 @@
+{"name":"Local: moniLine","url":"e:\\AAll-Code\\VS-code\\C++_colletion\\2024\\moniLine.cpp","tests":[{"id":1710209486163,"input":"10\npush 6\nempty\nquery\npop\nempty\npush 3\npush 4\npop\nquery\npush 6","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\AAll-Code\\VS-code\\C++_colletion\\2024\\moniLine.cpp","group":"local","local":true}
