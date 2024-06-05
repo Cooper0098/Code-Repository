@@ -72,7 +72,8 @@
         "memory_resource": "cpp",
         "numeric": "cpp",
         "string_view": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "map": "cpp"
     },
     "python.testing.unittestArgs": [
         "-v",

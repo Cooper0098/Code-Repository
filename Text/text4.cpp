@@ -1,77 +1,73 @@
-#include<iostream>
-#include<cstring>
-#include<algorithm>
-#include<stack>
-#include<unordered_map>
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <vector>
+#include <unordered_map> // 使用哈希表
+#include <stack>         // 使用栈
+#include <string>        // 使用字符串
+#include <utility>
 using namespace std;
-
-//双栈
-stack<int>num;
-stack<char>op;
-
-//求值函数,使用末尾的运算符操作末尾的两个数
-void eval()
+typedef long long ll;       // 定义long long类型的简写为ll
+typedef long double ld;     // 定义long double类型的简写为ld
+typedef pair<int, int> pii; // 定义pair<int, int>类型的简写为pii
+typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
+typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
+//--------------------------------模板--------------------------------//
+class Node
 {
-    auto b = num.top(); num.pop();//第二个操作数
-    auto a = num.top(); num.pop();//第一个操作数
-    auto c = op.top(); op.pop();  //运算符
+public:
+    int val;
+    vector<Node *> children;
 
-    int x;                        //结果计算(注意顺序)
-    if (c == '+')x = a + b;
-    else if (c == '-')x = a - b;
-    else if (c == '*')x = a * b;
-    else x = a / b;
-    num.push(x);                  //结果入栈
-}
+    Node() {}
 
-int main()
-{
-    //优先级表
-    unordered_map<char, int>pr{ {'+',1},{'-',1},{'*',2},{'/',2} };
-
-    //读入表达式
-    string str;
-    cin >> str;
-
-    //从前往后扫描表达式
-    for (int i = 0; i < str.size(); i++)
+    Node(int _val)
     {
-        auto c = str[i];
-        //扫描到数字,使用双指针法一直读入
-        if (isdigit(c))
+        val = _val;
+    }
+
+    Node(int _val, vector<Node *> _children)
+    {
+        val = _val;
+        children = _children;
+    }
+};
+//--------------------------------模板--------------------------------//N叉树
+
+class Solution
+{
+public:
+    vector<vector<char>> g;
+    int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+
+    int numIslands(vector<vector<char>> &grid)
+
+    {
+        // flood fill算法 --- bfs算法
+        g = grid;
+        int cnt = 0;
+        for (int i = 0; i < g.size(); i++)
         {
-            //j表示扫描到数字的指针
-            int x = 0, j = i;
-            while (j < str.size() && isdigit(str[j]))
-                x = x * 10 + str[j++] - '0';
-            //更新i指针
-            i = j - 1;
-            //数字入栈
-            num.push(x);
+            for (int j = 0; j < g[i].size(); j++)
+            {
+                if (g[i][j] == '1') // 注意是字符串
+                {
+                    dfs(i, j);
+                    cnt++;
+                }
+            }
         }
-        //左括号直接入栈
-        else if (c == '(')op.push(c);
-        //右括号出现,从右往左计算栈中数据,直到遇见左括号
-        else if (c == ')')
+        return cnt;
+    }
+
+    void dfs(int x, int y)
+    {
+        g[x][y] = 0;
+        for (int i = 0; i < 4; i++)
         {
-            //不断使用eval函数对末尾数字运算
-            while (op.top() != '(')eval();
-            //弹出左括号
-            op.pop();
-        }
-        //扫描到运算符
-        else
-        {
-            //如果栈顶运算符优先级较高,先操作栈顶元素再入栈
-            while (op.size() && pr[op.top()] >= pr[c])eval();
-            //如果栈顶运算符优先级较低,直接入栈
-            op.push(c);
+            int a = x + dx[i], b = y + dy[i];
+            if (a >= 0 && a < g.size() && b >= 0 && b < g[a].size() && g[a][b] == '1')//注意是字符串
+                dfs(a, b);
         }
     }
-    //把没有操作完的运算符从右往左操作一遍
-    while (op.size())eval();
-    //栈顶元素为最终答案
-    cout << num.top() << endl;
-    return 0;
-}
-
+};

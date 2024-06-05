@@ -2,15 +2,30 @@
 #include <algorithm>
 #include <cstdio>
 #include <vector>
-#include <algorithm>
-#include <iostream>
+#include <unordered_map> // 使用哈希表
+#include <stack>         // 使用栈
+#include <string>        // 使用字符串
+#include <utility>
 using namespace std;
+typedef long long ll;       // 定义long long类型的简写为ll
+typedef long double ld;     // 定义long double类型的简写为ld
+typedef pair<int, int> pii; // 定义pair<int, int>类型的简写为pii
+typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
+typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
+//--------------------------------模板--------------------------------//
 
-class Solution
+struct ListNode
 {
-public:
-    string addBinary(string a, string b)
-    {
-        int
-    }
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
+//--------------------------------模板--------------------------------// 链表
+
+int main()
+{
+    cout << "dsdsd";
+    return 0;
+}

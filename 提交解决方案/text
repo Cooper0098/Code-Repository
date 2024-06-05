@@ -13,3 +13,21 @@ del a.out /q /s
 del *.o /q /s
 del *.log /q /s
 del tempCodeRunnerFile.c /q /s
+
+
+
+常用库函数集合
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <vector>
+#include <unordered_map> //哈希表
+#include <stack>         //栈
+#include <string>        //字符串
+#include <utility>
+using namespace std;
+typedef long long ll;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef vector<int> vi;

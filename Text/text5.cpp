@@ -1,19 +1,17 @@
 #include <iostream>
+#include <algorithm>
+#include <cstdio>
 #include <vector>
+#include <unordered_map> // 使用哈希表
+#include <stack>         // 使用栈
+#include <string>        // 使用字符串
+#include <utility>
+#include <cmath>
+using namespace std;
+typedef long long ll;       // 定义long long类型的简写为ll
+typedef long double ld;     // 定义long double类型的简写为ld
+typedef pair<int, int> pii; // 定义pair<int, int>类型的简写为pii
+typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
+typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
+//--------------------------------模板--------------------------------//
 
-int main()
-{
-    std::vector<int> numbers; // 创建一个整数向量
-
-    numbers.push_back(10); // 向向量中添加元素
-    numbers.push_back(20);
-    numbers.push_back(30);
-
-    // 打印向量中的元素
-    for (int i = 0; i < numbers.size(); i++)
-    {
-        std::cout << numbers[i] << " ";
-    }
-
-    return 0;
-}
