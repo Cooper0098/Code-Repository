@@ -6,6 +6,9 @@
 #include <stack>         // 使用栈
 #include <string>        // 使用字符串
 #include <utility>
+#include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
+#include <functional>
+#include <numeric>
 using namespace std;
 typedef long long ll;       // 定义long long类型的简写为ll
 typedef long double ld;     // 定义long double类型的简写为ld
@@ -24,8 +27,12 @@ struct ListNode
 };
 //--------------------------------模板--------------------------------// 链表
 
-int main()
-{
-    cout << "dsdsd";
-    return 0;
-}
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int ans = 0 ; 
+        
+
+
+    }
+};

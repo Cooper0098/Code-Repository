@@ -6,6 +6,8 @@
 #include <stack>         // 使用栈
 #include <string>        // 使用字符串
 #include <utility>
+#include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
+#include <functional>
 using namespace std;
 typedef long long ll;       // 定义long long类型的简写为ll
 typedef long double ld;     // 定义long double类型的简写为ld
@@ -14,71 +16,46 @@ typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
 typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 //--------------------------------模板--------------------------------//
 
-struct TreeNode
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1010; // 个数
+
+int n, m;       // 物品个数和 背包体积V
+int v[N], w[N]; // 体积和价值
+int f[N][N];    // 状态=价值 ---》 求的目标
+
+int main()
 {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-}; 
-//--------------------------------模板--------------------------------// 二叉树
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++)
+        cin >> v[i] >> w[i];
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
- * };
- */
-class Solution {
-public:
-    int ans = 0;
-
-    int diameterOfBinaryTree(TreeNode* root) {
-        dfs(root);
-        return ans;
+    for (int i = 1; i <= n; i++)
+        for (int j = 0; j <= m; j++)
+        {
+            f[i][j] = f[i - 1][j];
+            if (j >= v[i])
+                f[i][j] = max(f[i][j], f[i - 1][j - v[i]] + w[i]);
+        }
+    cout << f[n][m] << endl;
+    
+    /////////////////////////////
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= m; j++)
+            cout << f[i][j] << ' ';
+        cout << endl;
     }
+    cout << endl;
+    for (int i = 0; i <= n; i++)
+        cout << v[i] << ' ';
+    cout << endl;
+    for (int i = 0; i <= n; i++)
 
-    int dfs(TreeNode* root) {
-        if (!root) {
-            return 0;
-        } // 节点为0 返回0
-        int left = dfs(root->left);
-        int right = dfs(root->right);
-        ans = max(ans, left + right);
-        return max(left, right) + 1;
-    }
-};
-
-int main() 
-{
-     // 创建一个简单的二叉树
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
-    
-    Solution solution; // 创建一个 Solution 类的实例
-    int diameter = solution.diameterOfBinaryTree(root); // 计算二叉树的直径
-    cout << "The diameter of the binary tree is: " << diameter << endl; // 输出结果
-    
-    
-
-    // 释放二叉树的内存
-    delete root->left->left;
-    delete root->left->right;
-    delete root->left;
-    delete root->right;
-    delete root; 
+        cout << w[i] << ' ';
+    cout << endl;
     return 0;
-
-   
 }

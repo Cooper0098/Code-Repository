@@ -73,7 +73,10 @@
         "numeric": "cpp",
         "string_view": "cpp",
         "numbers": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "cstdarg": "cpp",
+        "semaphore": "cpp",
+        "cinttypes": "cpp"
     },
     "python.testing.unittestArgs": [
         "-v",

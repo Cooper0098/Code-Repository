@@ -6,6 +6,8 @@
 #include <stack>         // 使用栈
 #include <string>        // 使用字符串
 #include <utility>
+#include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
+#include <functional>
 using namespace std;
 typedef long long ll;       // 定义long long类型的简写为ll
 typedef long double ld;     // 定义long double类型的简写为ld
@@ -37,37 +39,20 @@ public:
 class Solution
 {
 public:
-    vector<vector<char>> g;
-    int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
-
-    int numIslands(vector<vector<char>> &grid)
-
+    long long maxScore(vector<int> &nums, int x)
     {
-        // flood fill算法 --- bfs算法
-        g = grid;
-        int cnt = 0;
-        for (int i = 0; i < g.size(); i++)
+        int n = nums.size();
+        vector<long long> f(2, INT_MIN);
+        long long res = nums[0];
+        f[nums[0] % 2] = nums[0];
+        for (int i = 1; i < n; i++)
         {
-            for (int j = 0; j < g[i].size(); j++)
-            {
-                if (g[i][j] == '1') // 注意是字符串
-                {
-                    dfs(i, j);
-                    cnt++;
-                }
-            }
+            int pa = nums[i] % 2;
+            long long cur = max(f[pa] + nums[i], nums[i] - x + f[1 - pa]);
+            res = max(res, cur);
+            f[pa] = res;
         }
-        return cnt;
-    }
-
-    void dfs(int x, int y)
-    {
-        g[x][y] = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            int a = x + dx[i], b = y + dy[i];
-            if (a >= 0 && a < g.size() && b >= 0 && b < g[a].size() && g[a][b] == '1')//注意是字符串
-                dfs(a, b);
-        }
+        
+        return res;
     }
 };
