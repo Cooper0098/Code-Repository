@@ -29,11 +29,30 @@ struct ListNode
 
 class Solution {
 public:
-
-    vector<int> nextGreaterElements(vector<int>& nums) {
-        int ans = 0 ; 
+    int pivotIndex(vector<int>& nums) {
+        int totalSum = 0, leftSum = 0;
         
-
-
+        for (int num : nums) {
+            totalSum += num;
+        }
+        
+        for (int i = 0; i < nums.size(); i++) {
+            if (leftSum == totalSum - leftSum - nums[i]) {
+                return i;
+            }
+            leftSum += nums[i];
+        }
+        
+        return -1;
     }
 };
+
+int main()
+{
+    Solution a;
+    vector<int> nums = {-1, -1, 1, 1, 0, 0};
+    int result = a.pivotIndex(nums);
+    cout << "Pivot Index: " << result << endl;
+
+    return 0;
+}

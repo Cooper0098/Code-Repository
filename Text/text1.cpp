@@ -2,19 +2,30 @@
 #include <algorithm>
 #include <cstdio>
 #include <vector>
-#include <unordered_map> // 使用哈希表
-#include <stack>         // 使用栈
-#include <string>        // 使用字符串
+#include <unordered_map> // 使用哈希�?
+#include <stack>         // 使用�?
+#include <string>        // 使用字符�?
 #include <utility>
-#include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
+#include <cstring> // 有memset将一块内存区域设置为特定的值�? strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串�?
 #include <functional>
-using namespace std;        // 别删
+#include <numeric>
+using namespace std;
 typedef long long ll;       // 定义long long类型的简写为ll
 typedef long double ld;     // 定义long double类型的简写为ld
 typedef pair<int, int> pii; // 定义pair<int, int>类型的简写为pii
 typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
-typedef vector<int> vi;
+typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 //--------------------------------模板--------------------------------//
+
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+//--------------------------------模板--------------------------------// 链表
 
 struct TreeNode
 {
@@ -25,44 +36,66 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-//--------------------------------模板--------------------------------// 二叉树
-class Solution
-{
-public:
-    int maxCoins(vector<int> &nums)
-    {
-        int n = nums.size();
-        vector<int> a(n + 2, 1);
-        for (int i = 1; i <= n; i++)
-            a[i] = nums[i - 1];
-        vector<vector<int>> f(n + 2, vector<int>(n + 2));
-        for (int len = 3; len <= n + 2; len++)
-            for (int i = 0; i + len - 1 <= n + 1; i++)
-            {
-                int j = i + len - 1;
-                for (int k = i + 1; k < j; k++)
-                    f[i][j] = max(f[i][j], f[i][k] + f[k][j] + a[i] * a[k] * a[j]);
-            }
+//--------------------------------妯℃�?--------------------------------// 浜屽弶鏍�?
 
-        return f[0][n + 1];
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int ans = 0;
+        // int ii, jj = 0;
+        int n = nums.size();
+        if(n == 1)
+        {
+            return 0;
+        }
+        int lcnt = 0;
+        int rcnt = 0 ;
+        for (int i = 1; i < n; i++) {
+            rcnt += nums[i];
+        }
+        lcnt = rcnt - nums[n - 1] + nums[0];
+
+        if (rcnt == 0) {
+            ans = 0;
+            return ans;
+        }
+        if (lcnt == 0) {
+            ans = n - 1;
+            return ans;
+        }
+
+
+        int cnt = 0;
+        vector<int> arr;
+        for (int i = 1; i < n - 1; i++) {
+            rcnt = rcnt - nums[i];
+            cnt = cnt + nums[i - 1];
+            if (cnt == rcnt) {
+
+                arr.push_back(i);
+                // ans = arr[0];
+            }
+            if(!arr.empty())
+            {
+                ans = arr[0];
+                return ans;
+            }
+            // return ans;
+        }
+
+        
+
+        return -1;
     }
 };
 
 int main()
 {
-    Solution solution;
-    vector<int> nums = {3, 1, 5, 8}; // 示例输入硬币数组
+    Solution a;
+     vector<int> nums = {-1, -1, 1, 1, 0, 0};
+    int result = a.pivotIndex(nums);
+    cout << "Pivot Index: " << result << endl;
 
-    cout << "Input coins: ";
-    for (int num : nums)
-    {
-        cout << num << " ";
-    }
-    cout << endl;
-
-    int maxCoinsResult = solution.maxCoins(nums); // 调用 maxCoins 方法
-
-    cout << "Maximum coins that can be collected: " << maxCoinsResult << endl;
 
     return 0;
 }
