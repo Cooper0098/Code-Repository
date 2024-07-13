@@ -2,11 +2,11 @@
 #include <algorithm>
 #include <cstdio>
 #include <vector>
-#include <unordered_map> // 使用哈希�?
-#include <stack>         // 使用�?
-#include <string>        // 使用字符�?
+#include <unordered_map> // 使用哈希表
+#include <stack>         // 使用栈
+#include <string>        // 使用字符串
 #include <utility>
-#include <cstring> // 有memset将一块内存区域设置为特定的值�? strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串�?
+#include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
 #include <functional>
 #include <numeric>
 using namespace std;
@@ -26,7 +26,6 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 //--------------------------------模板--------------------------------// 链表
-
 struct TreeNode
 {
     int val;
@@ -36,66 +35,37 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-//--------------------------------妯℃�?--------------------------------// 浜屽弶鏍�?
-
-class Solution {
+//--------------------------------模板--------------------------------// 二叉树
+class Solution
+{
 public:
-    int pivotIndex(vector<int>& nums) {
-        int ans = 0;
-        // int ii, jj = 0;
-        int n = nums.size();
-        if(n == 1)
+    vector<int> numberGame(vector<int> &nums)
+    {
+        vector<int> seq;
+        seq = nums;
+        sort(seq.begin(), seq.end());
+        vector<int> aa, bb, arr;
+        if (nums.size() == 1)
         {
-            return 0;
-        }
-        int lcnt = 0;
-        int rcnt = 0 ;
-        for (int i = 1; i < n; i++) {
-            rcnt += nums[i];
-        }
-        lcnt = rcnt - nums[n - 1] + nums[0];
-
-        if (rcnt == 0) {
-            ans = 0;
-            return ans;
-        }
-        if (lcnt == 0) {
-            ans = n - 1;
-            return ans;
+            return nums;
         }
 
+        for (int i = 1, j =0; i < nums.size(); i = i+2, j ++)
+        {
+            aa.push_back(seq[i - 1]);
+            bb.push_back(seq[i]);
+            arr.push_back(bb[j]);
+            arr.push_back(aa[j]);
+            
 
-        int cnt = 0;
-        vector<int> arr;
-        for (int i = 1; i < n - 1; i++) {
-            rcnt = rcnt - nums[i];
-            cnt = cnt + nums[i - 1];
-            if (cnt == rcnt) {
-
-                arr.push_back(i);
-                // ans = arr[0];
-            }
-            if(!arr.empty())
-            {
-                ans = arr[0];
-                return ans;
-            }
-            // return ans;
         }
 
-        
-
-        return -1;
+            return arr;
     }
 };
 
 int main()
 {
-    Solution a;
-     vector<int> nums = {-1, -1, 1, 1, 0, 0};
-    int result = a.pivotIndex(nums);
-    cout << "Pivot Index: " << result << endl;
-
 
     return 0;
 }
