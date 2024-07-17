@@ -38,39 +38,6 @@ struct TreeNode
 };
 //--------------------------------模板--------------------------------// 二叉树
 
-// 24-7-16
-class Solution
-{
-public:
-    vector<int> findIntersectionValues(vector<int> &nums1, vector<int> &nums2)
-    {
-
-        vector<int> ans(2);
-        unordered_set<int> aa(nums1.begin(), nums1.end());
-        unordered_set<int> bb(nums2.begin(), nums2.end());
-        int n = nums1.size();
-        int m = nums2.size();
-
-        for (int x : nums1)
-        {
-            if (bb.count(x))
-            {
-                ans[0]++;
-            }
-        }
-        for (int x : nums2)
-        {
-            if (aa.count(x))
-            {
-                ans[1]++;
-            }
-        }
-
-        return ans;
-    }
-};
-
-//24-7-17
 class Solution
 {
 public:
@@ -119,16 +86,54 @@ public:
         }
         return ans;
     }
+    ///////////24-7-16
+
+    vector<int> findIntersectionValues(vector<int> &nums1, vector<int> &nums2)
+    {
+
+        vector<int> ans(2);
+        unordered_set<int> aa(nums1.begin(), nums1.end());
+        unordered_set<int> bb(nums2.begin(), nums2.end());
+        int n = nums1.size();
+        int m = nums2.size();
+
+        for (int x : nums1)
+        {
+            if (bb.count(x))
+            {
+                ans[0]++;
+            }
+        }
+        for (int x : nums2)
+        {
+            if (aa.count(x))
+            {
+                ans[1]++;
+            }
+        }
+
+        return ans;
+    }
+    ///////////24-7-17
+
+
+
+
+
 };
-
-
-
-
-
-
 
 int main()
 {
+
+    Solution solution1;
+
+    // Test case 1
+    vector<int> nums1_1 = {1, 2, 2, 1};
+    vector<int> nums2_1 = {2, 2};
+    vector<int> result1 = solution1.findIntersectionValues(nums1_1, nums2_1);
+    cout << "Test Case 1: [" << result1[0] << ", " << result1[1] << "]" << endl; // Expected output: [2, 2]
+
+    
 
     return 0;
 }

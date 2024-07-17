@@ -1,10 +1,30 @@
-public class LeetAll {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-    }
-}
+
+import java.util.HashSet;
 
 class Solution {
+    public int[] findIntersectionValues(int[] nums1, int[] nums2) {
+
+        HashSet<Integer> s1 = new HashSet<>();
+        for (int x : nums1) {
+            s1.add(x);
+        }
+        HashSet<Integer> s2 = new HashSet<>();
+        for (int x : nums2) {
+            s2.add(x);
+        }
+        int[] res = new int[2];
+        for (int x : nums1) {
+            if (s2.contains(x))
+                res[0]++;
+        }
+
+        for (int x : nums2) {
+            if (s1.contains(x))
+                res[1]++;
+        }
+        return res;
+    }
+    //////// 24-7-15
 
     public int incremovableSubarrayCount(int[] a) {
         int n = a.length;
@@ -27,5 +47,20 @@ class Solution {
         return ans;
 
     }
+    ///////////////// 24-7-17
 
+
+    
+
+}
+
+public class LeetAll {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        //////////////////////////////////////////////////////
+
+        int[] arr = { 1, 2, 3, 4, 5 };
+        int count = new Solution().incremovableSubarrayCount(arr);
+        System.out.println("Number of incremovable subarrays: " + count);
+    }
 }
