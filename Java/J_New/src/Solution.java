@@ -1,37 +1,32 @@
-import java.util.Arrays;
+import java.util.HashSet;
 
 class Solution {
+    public int[] findIntersectionValues(int[] nums1, int[] nums2) {
 
-    public boolean canSortArray(int[] nums) {
-        int n = nums.length;
-        for(int i = 0 ; i <n ; )
-        {
-            int start = i;
-            int ones = Integer.bitCount(nums[i++]);
-            while (i< n && Integer.bitCount(nums[i]) == ones) {
-                i++;
-
-
-                
-            }
-            Arrays.sort(nums,start,i);
+        HashSet<Integer> s1 = new HashSet<>();
+        for (int x : nums1) {
+            s1.add(x);
         }
-        for(int i = 1; i < n ; i++)
-        {
-            if(nums[i] <nums[i-1])
-            
-                return false;
-            
+        HashSet<Integer> s2 = new HashSet<>();
+        for (int x : nums2) {
+            s2.add(x);
         }
-        return true;
-        
-        
+        int[] res = new int[2];
+        for (int x : nums1) {
+            if (s2.contains(x))
+                res[0]++;
+        }
 
+        for (int x : nums2) {
+            if (s1.contains(x))
+                res[1]++;
+        }
+        return res;
     }
 
     public static void main(String[] args) {
 
-        System.out.println("ds");
+        System.out.println("111");
 
     }
 

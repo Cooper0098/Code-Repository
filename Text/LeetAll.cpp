@@ -10,7 +10,6 @@
 #include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
 #include <functional>
 #include <numeric>
-// #include "example.h"
 using namespace std;
 typedef long long ll;       // 定义long long类型的简写为ll
 typedef long double ld;     // 定义long double类型的简写为ld
@@ -38,6 +37,8 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 //--------------------------------模板--------------------------------// 二叉树
+
+// 24-7-16
 class Solution
 {
 public:
@@ -45,29 +46,86 @@ public:
     {
 
         vector<int> ans(2);
-        unordered_set<int> aa(nums1.begin(),nums1.end());
+        unordered_set<int> aa(nums1.begin(), nums1.end());
         unordered_set<int> bb(nums2.begin(), nums2.end());
         int n = nums1.size();
         int m = nums2.size();
 
         for (int x : nums1)
         {
-            if(bb.count(x))
+            if (bb.count(x))
             {
                 ans[0]++;
             }
         }
-        for (int x: nums2)
+        for (int x : nums2)
         {
-            if(aa.count(x))
+            if (aa.count(x))
             {
                 ans[1]++;
             }
         }
 
-            return ans;
+        return ans;
     }
 };
+
+//24-7-17
+class Solution
+{
+public:
+    int numberOfSets(int n, int maxDistance, vector<vector<int>> &roads)
+    {
+        int ans = 0;
+        for (int mask = 0; mask < 1 << n; ++mask)
+        {
+            int g[n][n];
+            memset(g, 0x3f, sizeof(g));
+            for (auto &e : roads)
+            {
+                int u = e[0], v = e[1], w = e[2];
+                if ((mask >> u & 1) & (mask >> v & 1))
+                {
+                    g[u][v] = min(g[u][v], w);
+                    g[v][u] = min(g[v][u], w);
+                }
+            }
+            for (int k = 0; k < n; ++k)
+            {
+                if (mask >> k & 1)
+                {
+                    g[k][k] = 0;
+                    for (int i = 0; i < n; ++i)
+                    {
+                        for (int j = 0; j < n; ++j)
+                        {
+                            g[i][j] = min(g[i][j], g[i][k] + g[k][j]);
+                        }
+                    }
+                }
+            }
+            int ok = 1;
+            for (int i = 0; i < n && ok == 1; ++i)
+            {
+                for (int j = 0; j < n && ok == 1; ++j)
+                {
+                    if ((mask >> i & 1) & (mask >> j & 1) && g[i][j] > maxDistance)
+                    {
+                        ok = 0;
+                    }
+                }
+            }
+            ans += ok;
+        }
+        return ans;
+    }
+};
+
+
+
+
+
+
 
 int main()
 {
