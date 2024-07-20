@@ -49,8 +49,75 @@ class Solution {
     }
     ///////////////// 24-7-17
 
+    public int minimumLevels(int[] possible) {
+        int n = possible.length;
+        int s = 0;
+        for (int x : possible) {
+            s += x;
 
-    
+        }
+        s = s * 2 - n;
+        int pre = 0;
+        for (int i = 0; i < n; i++) {
+            pre += possible[i] == 1 ? 2 : -2;
+            if (pre > s) {
+                return i + 1;
+            }
+
+        }
+        return -1;
+
+    }
+
+    int ans = Integer.MAX_VALUE;
+    int[][] grid;
+    public int minimumMoves(int[][] grid) {
+        this.grid = grid;
+        int cnt = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+            for (int j = 0; j < 3; j++) {
+                if (grid[i][j] == 0)
+                    cnt++;
+            }
+        }
+        
+        dfs(0, cnt);
+        return ans;
+
+        
+
+    }
+
+    private void dfs(int sum, int cnt)
+    {
+        if(cnt == 0) 
+            ans = Math.min(sum, ans);
+
+            for(int i = 0 ; i < 3 ; i++)
+            {
+                for(int j = 0 ; j < 3;j++)
+                {
+                    if(grid[i][j] == 0)
+                    {
+                        for(int k = 0 ; k <3;k++)
+                        {
+                            for(int l = 0 ; l <3;l++)
+                            {
+                                if(grid[k][l] > 1)
+                                {
+                                    grid[k][l]--;
+                                    grid[i][j] = 1;
+                                    dfs(sum + Math.abs(i - k) + Math.abs(j - l), cnt - 1);
+                                    grid[k][l]++;
+                                    grid[i][j] = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
 
 }
 

@@ -41,6 +41,7 @@ struct TreeNode
 class Solution
 {
 public:
+    ///////////24-7-16
     int numberOfSets(int n, int maxDistance, vector<vector<int>> &roads)
     {
         int ans = 0;
@@ -86,8 +87,8 @@ public:
         }
         return ans;
     }
-    ///////////24-7-16
 
+    ///////////24-7-17
     vector<int> findIntersectionValues(vector<int> &nums1, vector<int> &nums2)
     {
 
@@ -114,16 +115,30 @@ public:
 
         return ans;
     }
-    ///////////24-7-17
 
+    int fib(int n)
+    {
+        int ans = 0;
+
+        if (n <= 1)
+            return n;
+        else
+        {
+            ans = fib(n - 1) + fib(n - 2);
+            
+        }
+        return ans;
+    }
     
 
 
-
+    public:
+    int minimumMoves(vector<vector<int>>& grid) {
+        int ans = 0; 
         
+    }
 
-
-
+    
 };
 
 int main()
@@ -137,7 +152,12 @@ int main()
     vector<int> result1 = solution1.findIntersectionValues(nums1_1, nums2_1);
     cout << "Test Case 1: [" << result1[0] << ", " << result1[1] << "]" << endl; // Expected output: [2, 2]
 
+    int a = solution1.fib(2);
+    cout << a << endl;
     
+
+
+
 
     return 0;
 }
