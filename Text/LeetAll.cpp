@@ -10,6 +10,7 @@
 #include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
 #include <functional>
 #include <numeric>
+#include <ranges>
 using namespace std;
 typedef long long ll;       // 定义long long类型的简写为ll
 typedef long double ld;     // 定义long double类型的简写为ld
@@ -125,21 +126,78 @@ public:
         else
         {
             ans = fib(n - 1) + fib(n - 2);
-            
         }
         return ans;
     }
-    
 
-
-    public:
-    int minimumMoves(vector<vector<int>>& grid) {
-        int ans = 0; 
-        
+    int maximumSum(vector<int> &arr) // dp-algorithm
+    {
+        int ans = INT_MIN, n = arr.size();
+        vector<vector<int>> memo(n + 1, vector<int>(2, INT_MIN));
+        auto dfs = [&](auto &&dfs, int i, int j) -> int
+        {
+            if (i < 0)
+                return INT_MIN / 2;
+            int &res = memo[i][j];
+            if (res != INT_MIN)
+                return res;
+            if (j == 0)
+                return res = max(dfs(dfs, i - 1, 0), 0) + arr[i];
+            return res = max(dfs(dfs, i - 1, 1) + arr[i], dfs(dfs, i - 1, 0));
+        };
+        for (int i = 0; i < n; i++)
+            ans = max(ans, max(dfs(dfs, i, 0), dfs(dfs, i, 1)));
+        return ans;
     }
 
-    
+    int minimumOperations(string num)
+    {
+
+        int n = num.size();
+        bool found0 = false, found5 = false;
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            char c = num[i];
+
+            if (found0 && (c == '0' || c == '5') || found5 && (c == '2' || c == '7'))
+
+            // if (found0 && (c == '0' || '5') || found5 && (c == '2' || c == '7'))
+            {
+                return n - i - 2;
+            }
+
+            if (c == '0')
+            {
+                found0 = true;
+            }
+            else if (c == '5')
+            {
+                found5 = true;
+            }
+        }
+        return n - found0;
+    }
+
+    int findValueOfPartition(vector<int> &nums)
+    {
+        int ans = INT_MAX;
+
+        sort(nums.begin(), nums.end());
+
+        int n = nums.size();
+
+        for (int i = 1; i < n; i++)
+        {
+            ans = min(ans, abs(nums[i] - nums[i - 1]));
+        }
+
+        return ans;
+    }
 };
+
+//-------------------------------------------------------------------------------//
+
 
 int main()
 {
@@ -154,10 +212,9 @@ int main()
 
     int a = solution1.fib(2);
     cout << a << endl;
-    
 
-
-
+    int b = 5 / 2;
+    cout << b << endl;
 
     return 0;
 }
