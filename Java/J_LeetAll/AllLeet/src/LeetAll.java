@@ -70,7 +70,7 @@ class Solution {
 
     }
 
-    public int maximumSum(int[] arr) {// 前后缀分解
+    public int maximumSum(int[] arr) {// prefix and suffix decomposition
 
         int n = arr.length;
         int[] f = new int[n], g = new int[n];
@@ -105,8 +105,36 @@ class Solution {
         return ans;
     }
 
+    public String getSmallestString(String s, int k) {
+        char[] t = s.toCharArray();
+        for (int i = 0; i < t.length; i++) {
+            int dis = Math.min(t[i] - 'a', 'z' - t[i] + 1);
+            if (dis > k) {
+                t[i] -= k;
+                break;
+            }
+            t[i] = 'a';
+            k -= dis;
+        }
+        return new String(t);
+
+    }
+
+    
+
+    // --------------------------------------java------------------------------------//
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
 }
-// --------------------------------------------------------------------------------//
+// ---------------------------------------Java---------------------------------------//
 
 public class LeetAll {
     public static void main(String[] args) {
@@ -116,5 +144,6 @@ public class LeetAll {
         int[] arr = { 1, 2, 3, 4, 5 };
         int count = new Solution().incremovableSubarrayCount(arr);
         System.out.println("Number of incremovable subarrays: " + count);
+        System.out.println((6334+11)%11);
     }
 }
