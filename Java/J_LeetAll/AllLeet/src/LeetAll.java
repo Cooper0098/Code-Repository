@@ -120,6 +120,7 @@ class Solution {
 
     }
 
+
     
 
     // --------------------------------------java------------------------------------//
@@ -144,6 +145,6 @@ public class LeetAll {
         int[] arr = { 1, 2, 3, 4, 5 };
         int count = new Solution().incremovableSubarrayCount(arr);
         System.out.println("Number of incremovable subarrays: " + count);
-        System.out.println((6334+11)%11);
+        System.out.println((6334 + 11) % 11);
     }
 }
