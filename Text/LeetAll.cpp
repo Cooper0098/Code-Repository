@@ -213,6 +213,102 @@ public:
         }
         return s;
     }
+
+    int calPoints(vector<string> &operations)
+    {
+        // vector<int> arr;
+        int ans = 0;
+        stack<int> stk;
+        for (int i = 0; i < operations.size(); i++)
+        {
+            string opt = operations[i];
+            if (opt == "C")
+            {
+                stk.pop();
+            }
+            else if (opt == "D")
+            {
+
+                stk.push(stk.top() * 2);
+            }
+            else if (opt == "+")
+            {
+
+                int a = stk.top();
+                stk.pop();
+                int cum = a + stk.top();
+                stk.push(a);
+                stk.push(cum);
+            }
+            else
+            {
+                int num = stoi(operations[i]);
+                stk.push(num);
+            }
+        }
+        while (!stk.empty())
+        {
+            int a = stk.top();
+            ans += a;
+            stk.pop();
+        }
+
+        return ans;
+    }
+
+    vector<int> getGoodIndices(vector<vector<int>> &variables, int target)
+    {
+        vector<int> ans;
+        for (int i = 0; i < variables.size(); i++)
+        {
+            auto &v = variables[i];
+            if (pow(pow(v[0], v[1], 10), v[2], v[3]) == target)
+            {
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+
+private:
+    int pow(int x, int n, int mod) // 快速幂
+    {
+        int res = 1;
+        while (n)
+        {
+            if (n & 1)
+            {
+                res = res * x % mod;
+            }
+
+            x = x * x % mod;
+            n = n >> 1;
+        }
+        return res;
+    }
+
+public:
+    double myPow(double x, int n)
+    {
+        double ans = 1;
+        long long nn = n;
+
+        if (nn < 0)
+        {
+            nn = -nn;
+            x = 1 / x;
+        }
+        while (nn)
+        {
+            if (n & 1)
+                ans *= x;
+
+            x *= x;
+            n >>= 1;
+        }
+        return ans;
+    }
+
     // --------------------------------------Cpp-------------------------------------//
     //
     //
@@ -231,19 +327,16 @@ public:
 int main()
 {
 
-    Solution solution1;
+    Solution solutionTest;
 
     // Test case 1
     vector<int> nums1_1 = {1, 2, 2, 1};
     vector<int> nums2_1 = {2, 2};
-    vector<int> result1 = solution1.findIntersectionValues(nums1_1, nums2_1);
+    vector<int> result1 = solutionTest.findIntersectionValues(nums1_1, nums2_1);
     cout << "Test Case 1: [" << result1[0] << ", " << result1[1] << "]" << endl; // Expected output: [2, 2]
 
-    int a = solution1.fib(2);
+    int a = solutionTest.fib(2);
     cout << a << endl;
-
-    int b = 5 / 2;
-    cout << b << endl;
 
     return 0;
 }

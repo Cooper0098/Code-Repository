@@ -18,7 +18,6 @@ typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
 typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 //--------------------------------模板--------------------------------//
 
-
 class Solution
 {
 public:
@@ -27,10 +26,10 @@ public:
 
 int main()
 {
-
+    
     int a, b;
     cin >> a >> b;
-    cout << a * b <<endl <<  a + b << endl;
+    cout << a + b << endl;
 
     return 0;
 }

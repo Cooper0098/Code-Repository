@@ -1,5 +1,7 @@
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashSet;
 
 class Solution {
@@ -120,8 +122,28 @@ class Solution {
 
     }
 
+    public int calPoints(String[] operations) {
 
-    
+        Deque<Integer> stk = new ArrayDeque<>();
+        for (String op : operations) {
+            if ("+".equals(op)) {
+                int a = stk.pop();
+                int b = stk.peek();
+                stk.push(a);
+                stk.push(a + b);
+
+            } else if ("D".equals(op)) {
+                stk.push(stk.peek() << 1);
+            } else if ("C".equals(op)) {
+                stk.pop();
+            } else {
+                stk.push(Integer.valueOf(op));
+            }
+        }
+        return stk.stream().mapToInt(Integer::intValue).sum();
+    }
+
+
 
     // --------------------------------------java------------------------------------//
     //
@@ -145,6 +167,9 @@ public class LeetAll {
         int[] arr = { 1, 2, 3, 4, 5 };
         int count = new Solution().incremovableSubarrayCount(arr);
         System.out.println("Number of incremovable subarrays: " + count);
-        System.out.println((6334 + 11) % 11);
+
+        double a = new Solution().myPow(2, 3);
+        System.out.println(a);
+
     }
 }
