@@ -288,17 +288,17 @@ private:
     }
 
 public:
-    double myPow(double x, int n)
+    double myPow(double x, int N)
     {
         double ans = 1;
-        long long nn = n;
+        long long n = N;
 
-        if (nn < 0)
+        if (n < 0)
         {
-            nn = -nn;
+            n = -n;
             x = 1 / x;
         }
-        while (nn)
+        while (n)
         {
             if (n & 1)
                 ans *= x;
@@ -307,6 +307,36 @@ public:
             n >>= 1;
         }
         return ans;
+    }
+
+    int maxmiumScore(vector<int> &cards, int cnt)
+    {
+        int ans = 0, lastodd = 0, lasteven = 0;
+
+        sort(cards.begin(), cards.end(), std::greater<int>());
+
+        for (int i = 0; i < cnt; i++)
+        {
+
+            ans += cards[i];
+            if (cards[i] % 2 == 1)
+                lastodd = cards[i];
+            else
+                lasteven = cards[i];
+        }
+        if (ans % 2 == 0)
+            return ans;
+
+        int max1 = 0, max2 = 0;
+
+        for (int i = cnt; i < cards.size(); i++)
+        {
+            if (lasteven && max1 == 0 && cards[i] % 2)
+                max1 = ans - lasteven + cards[i];
+            if (lastodd && max2 == 0 && cards[i] % 2 == 0)
+                max2 = ans - lastodd + cards[i];
+        }
+        return max(max1, max2);
     }
 
     // --------------------------------------Cpp-------------------------------------//
@@ -337,6 +367,9 @@ int main()
 
     int a = solutionTest.fib(2);
     cout << a << endl;
+
+    double b = solutionTest.myPow(2, 3);
+    cout << b << endl;
 
     return 0;
 }

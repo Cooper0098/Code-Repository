@@ -26,10 +26,13 @@ public:
 
 int main()
 {
+    std::vector<int> arr = {5, 3, 8, 1, 2};
     
-    int a, b;
-    cin >> a >> b;
-    cout << a + b << endl;
+    std::sort(arr.begin(), arr.end(), std::greater<int>());
+    
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
 
     return 0;
 }
