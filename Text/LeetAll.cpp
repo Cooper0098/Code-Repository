@@ -39,6 +39,9 @@ struct TreeNode
 };
 //--------------------------------模板--------------------------------// 二叉树
 
+//   Definition for a binary tree node.
+
+
 class Solution
 {
 public:

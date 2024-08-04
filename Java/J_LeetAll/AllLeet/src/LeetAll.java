@@ -2,6 +2,7 @@
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 
 class Solution {
@@ -148,29 +149,49 @@ class Solution {
         int n = grid[0].length;
         int[] colSum = new int[n];
         Arrays.fill(colSum, -1);
-        for(int [] row : grid)
-        {
-            for(int j =0; j < n;j++)
-            {
+        for (int[] row : grid) {
+            for (int j = 0; j < n; j++) {
                 colSum[j] += row[j];
             }
         }
         long ans = 0;
-        for(int [] row: grid)
-        {
+        for (int[] row : grid) {
             int rowSum = -1;
-            for(int x : row)
-            {
+            for (int x : row) {
                 rowSum += x;
 
             }
-            for(int j  = 0 ; j < row.length;j++)
-            {
-                if(row[j] == 1)
-                {
+            for (int j = 0; j < row.length; j++) {
+                if (row[j] == 1) {
                     ans += rowSum * colSum[j];
                 }
             }
+        }
+        return ans;
+    }
+
+    public int maxPointsInsideSquare(int[][] points, String s) {
+
+        int n = points.length;
+        int[][] tep = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            tep[i][0] = Math.max(Math.abs(points[i][0]), Math.abs(points[i][1]));
+            tep[i][0] = s.charAt(i) - 'a';
+
+        }
+        Arrays.sort(tep, ((o1, o2) -> o1[0] - o2[0]));
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int[] cnt = new int[26];
+        int ans = 0;
+        for (int i = 0; i < tep.length; i++) {
+            cnt[tep[i][1]]++;
+            if (cnt[tep[i][1]] > 1) {
+                ans -= map.getOrDefault(tep[i][0], 0);
+                break;
+            }
+            map.put(tep[i][0], map.getOrDefault(tep[i][0], 0) + 1);
+            ans++;
+
         }
         return ans;
     }
@@ -189,6 +210,27 @@ class Solution {
 // ---------------------------------------Java---------------------------------------//
 
 public class LeetAll {
+    // Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    // ---------------------------------binary_tree----------------------------------//
+
     public static void main(String[] args) {
         System.out.println("Hello, World!");
         //////////////////////////////////////////////////////
@@ -197,8 +239,6 @@ public class LeetAll {
         int count = new Solution().incremovableSubarrayCount(arr);
         System.out.println("Number of incremovable subarrays: " + count);
 
-        double a = new Solution().myPow(2, 3);
-        System.out.println(a);
 
     }
 }
