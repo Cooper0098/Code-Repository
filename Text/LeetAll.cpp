@@ -39,9 +39,6 @@ struct TreeNode
 };
 //--------------------------------模板--------------------------------// 二叉树
 
-//   Definition for a binary tree node.
-
-
 class Solution
 {
 public:
@@ -340,6 +337,69 @@ public:
                 max2 = ans - lastodd + cards[i];
         }
         return max(max1, max2);
+    }
+
+private:
+    bool ans = false;
+    const int P = 149, Q = 151, MOD = 1e6 + 7, U = 10000;
+    int T = INT_MIN;
+
+    int dfs(TreeNode *root)
+    {
+        if (!root)
+            return 12345;
+        int left = dfs(root->left), right = dfs(root->right);
+        int x = (root->val % MOD + MOD) % MOD;
+        if (left == T || right == T)
+            ans = true;
+        return (x + left * P % MOD + right * Q + U) % MOD;
+    }
+    bool isSubtree(TreeNode *root, TreeNode *subRoot)
+    {
+
+        T = dfs(subRoot);
+        if (T == dfs(root))
+            ans = true;
+        return ans;
+    }
+
+public:
+    int findIntegers(int n)
+    {
+        vector<int> num;
+        while (n)
+            num.push_back(n % 2), n /= 2;
+
+        vector<vector<int>> f(num.size() + 1, vector<int>(2));
+        f[1][0] = f[1][1] = 1;
+        for (int i = 2; i <= num.size(); i++)
+        {
+            f[i][0] = f[i - 1][0] + f[i - 1][1];
+            f[i][1] = f[i - 1][0];
+        }
+        int res = 0;
+
+        for (int i = num.size(), last = 0; i; i--)
+        {
+            int x = num[i - 1];
+            if (x)
+            {
+                res += f[i][0];
+                if (last)
+                    return res;
+            }
+            last = x;
+        }
+        return res + 1;
+    }
+
+    int addedInteger(vector<int> &nums1, vector<int> &nums2)
+    {
+        int ans = 0;
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
+
+        return nums2[0] - nums1[0];
     }
 
     // --------------------------------------Cpp-------------------------------------//

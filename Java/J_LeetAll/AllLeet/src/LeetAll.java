@@ -6,6 +6,27 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 class Solution {
+
+    // Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
     public int[] findIntersectionValues(int[] nums1, int[] nums2) {
 
         HashSet<Integer> s1 = new HashSet<>();
@@ -195,6 +216,35 @@ class Solution {
         }
         return ans;
     }
+
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+
+        if (root == null) {
+            return false;
+        }
+
+        return isSameTree(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+
+    }
+
+    private boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null || q == null)
+            return p == q;
+        return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+
+
+
+    public int addedInteger(int[] nums1, int[] nums2) {
+
+        Arrays.sort(nums1);
+
+        Arrays.sort(nums2);
+        return nums2[0] - nums1[0];
+
+    }
+
     // --------------------------------------java------------------------------------//
     //
     //
@@ -210,25 +260,7 @@ class Solution {
 // ---------------------------------------Java---------------------------------------//
 
 public class LeetAll {
-    // Definition for a binary tree node.
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
     // ---------------------------------binary_tree----------------------------------//
 
     public static void main(String[] args) {
@@ -238,7 +270,6 @@ public class LeetAll {
         int[] arr = { 1, 2, 3, 4, 5 };
         int count = new Solution().incremovableSubarrayCount(arr);
         System.out.println("Number of incremovable subarrays: " + count);
-
 
     }
 }
