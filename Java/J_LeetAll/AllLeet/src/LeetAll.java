@@ -233,15 +233,79 @@ class Solution {
         return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
-
-
-
     public int addedInteger(int[] nums1, int[] nums2) {
 
         Arrays.sort(nums1);
 
         Arrays.sort(nums2);
         return nums2[0] - nums1[0];
+
+    }
+
+    public int minimumAddedInteger(int[] nums1, int[] nums2) {
+
+        int ans = 0;
+
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+
+        for (int i = 2; i > 0; i--) {
+            int x = nums2[0] - nums1[i];
+            int j = 0;
+            for (int k = i; k < nums1.length; k++) {
+                if (nums2[j] == nums1[k] + x && ++j == nums2.length) {
+                    return x;
+                }
+            }
+        }
+        ans = nums2[0] - nums1[0];
+        return ans;
+    }
+
+    public boolean isSubsequence(String s, String t) {
+
+        int k = 0;
+        for (char ch : t.toCharArray()) {
+            if (k < s.length() && s.charAt(k) == ch)
+                k++;
+        }
+        return k == s.length();
+
+    }
+
+    public int maxUncrossedLines(int[] nums1, int[] nums2) {
+
+        int n = nums1.length, m = nums2.length;
+        int[][] f = new int[n + 1][m + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                f[i][j] = Math.max(f[i - 1][j], f[i][j - 1]);
+                if (nums1[i - 1] == nums2[j - 1]) {
+                    f[i][j] = Math.max(f[i][j], f[i - 1][j - 1] + 1);
+                }
+            }
+        }
+        return f[n][m];
+
+    }
+
+    public boolean isArraySpecial(int[] nums) {
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] % 2 == nums[i] % 2)
+                return false;
+        }
+        return true;
+    }
+
+    public boolean checkRecord(String s) {
+
+        int cntA = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'A' && ++cntA > 1)
+                return false;
+        }
+        return !s.contains("LLL");
 
     }
 

@@ -39,6 +39,62 @@ struct TreeNode
 };
 //--------------------------------模板--------------------------------// 二叉树
 
+class MagicDictionary
+{
+public:
+    const int N = 10010;
+    int son[10010][26];
+    int idx;
+    bool is_end[10010];
+
+    void insert(string &s)
+    {
+        int p = 0;
+        for (auto c : s)
+        {
+            int u = c - 'a';
+            if (!son[p][u])
+                son[p][u] = ++idx;
+            p = son[p][u];
+        }
+        is_end[p] = true;
+    }
+
+    MagicDictionary()
+    {
+        memset(son, 0, sizeof son);
+        idx = 0;
+        memset(is_end, 0, sizeof is_end);
+    }
+
+    void buildDict(vector<string> dictionary)
+    {
+        for (auto &s : dictionary)
+            insert(s);
+    }
+
+    bool dfs(string &s, int p, int u, int c)
+    {
+        if (is_end[p] && u == s.size() && c == 1)
+            return true;
+        if (c > 1 || u == s.size())
+            return false;
+        for (int i = 0; i < 26; i++)
+        {
+            if (!son[p][i])
+                continue;
+            if (dfs(s, son[p][i], u + 1, c + (s[u] - 'a' != i)))
+                return true;
+        }
+        return false;
+    }
+
+    bool search(string searchWord)
+    {
+        return dfs(searchWord, 0, 0, 0);
+    }
+};
+
 class Solution
 {
 public:
@@ -400,6 +456,100 @@ public:
         sort(nums2.begin(), nums2.end());
 
         return nums2[0] - nums1[0];
+    }
+
+    bool isSubsequence(string s, string t)
+    {
+        int k = 0;
+        for (auto c : t)
+        {
+            if (k < s.size() && c == s[k])
+                k++;
+        }
+
+        return k == s.size();
+    }
+
+    int longestCommonSubsequence(string text1, string text2)
+    {
+
+        int n = text1.size(), m = text2.size();
+        vector<vector<int>> f(n + 1, vector<int>(m + 1));
+        for (int i = 1; i <= n; i++)
+
+            for (int j = 1; j <= m; j++)
+            {
+                f[i][j] = max(f[i - 1][j], f[i][j - 1]);
+                if (text1[i - 1] == text2[j - 1])
+                    f[i][j] = max(f[i][j], f[i - 1][j - 1] + 1);
+            }
+
+        return f[n][m];
+    }
+
+    bool isArraySpecial(vector<int> &nums)
+    {
+        if (nums.size() == 1)
+            return true;
+        int cnt = 0;
+
+        for (int i = 1; i < nums.size(); i++)
+        {
+            int a = nums[i] + nums[i - 1];
+            if (a % 2 != 0)
+                cnt++;
+        }
+        if (cnt == nums.size() - 1)
+            return true;
+        return false;
+    }
+
+    vector<bool> isArraySpecial(vector<int> &nums, vector<vector<int>> &queries)
+    {
+        vector<bool> ans;
+        vector<int> meber;
+        for (int i = 0; i < queries.size(); i++)
+        {
+            for (int j = 0; j < queries[0].size(); j++)
+            {
+                meber.push_back(queries[i][j]);
+            }
+        }
+        for (int i = 0; i < meber.size(); i += 2)
+        {
+            int l, r;
+            l = meber[i];
+            r = meber[i + 1];
+            vector<int> newnum;
+            for (int j = l; j <= r; j++)
+            {
+                newnum.push_back(nums[j]);
+            }
+            bool a = isArraySpecial(newnum);
+            ans.push_back(a);
+        }
+        return ans;
+    }
+
+    bool checkRecord(string s)
+    {
+        bool ans = true;
+        int cntA = 0;
+        s = s + "AA";
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (s[i] == 'A')
+            {
+                cntA++;
+            }
+            if (cntA >= 2)
+                return false;
+            if(s[i] == 'L'&& s[i+1] == 'L'&&s[i+2] == 'L')
+                return false;
+        }
+
+
+        return ans;
     }
 
     // --------------------------------------Cpp-------------------------------------//
