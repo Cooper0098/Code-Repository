@@ -35,6 +35,7 @@ int main()
     // }
 
     int *a;
+    
 
     int b = 100;
     a = &b;
@@ -49,4 +50,5 @@ int main()
     cout << b << endl;
 
     return 0;
+    
 }

@@ -544,11 +544,46 @@ public:
             }
             if (cntA >= 2)
                 return false;
-            if(s[i] == 'L'&& s[i+1] == 'L'&&s[i+2] == 'L')
+            if (s[i] == 'L' && s[i + 1] == 'L' && s[i + 2] == 'L')
                 return false;
         }
 
+        return ans;
+    }
 
+    long long findMaximumNumber(long long k, int x)
+    {
+        long long num = 0, pre1 = 0;
+        for (long long i = __lg((k + 1) << x); i >= 0; i--)
+        {
+            long long cnt = (pre1 << i) + (i / x << i >> 1);
+            if (cnt <= k)
+            {
+                k -= cnt;
+                num |= 1LL << i;
+                pre1 += (i + 1) % x == 0;
+            }
+        }
+        return num - 1;
+    }
+
+    int findPermutationDifference(string s, string t)
+    {
+        int ans = 0;
+        int n = s.size();
+        unordered_map<char, int> myMap;
+
+        for (size_t i = 0; i < n; i++)
+        {
+            myMap[s[i]] = static_cast<int>(i);
+        }
+        for (int i = 0; i < n; i++)
+        {
+
+            int cnt = myMap[t[i]];
+
+            ans += abs(cnt - i);
+        }
         return ans;
     }
 
