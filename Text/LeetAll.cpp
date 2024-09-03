@@ -587,7 +587,100 @@ public:
         return ans;
     }
 
-    // --------------------------------------Cpp-------------------------------------//
+    bool satisfiesConditions(vector<vector<int>> &grid)
+    {
+        bool ans = true;
+
+        for (int i = 0; i < grid.size(); i++)
+
+            for (int j = 0; j < grid[i].size(); j++)
+            {
+
+                if (i + 1 < grid.size() && grid[i][j] != grid[i + 1][j])
+                {
+                    ans = false;
+                }
+                if (j + 1 < grid[i].size() && grid[i][j] == grid[i][j + 1])
+                {
+                    ans = false;
+                }
+            }
+
+        return ans;
+    }
+
+    bool canMakeSquare(vector<vector<char>> &grid)
+    {
+        int ans = false;
+        for (int i = 0; i <= 1; i++)
+            for (int j = 0; j <= 1; j++)
+            {
+
+                int s1 = grid[i][j];
+                int s2 = grid[i][j + 1];
+                int s3 = grid[i + 1][j];
+                int s4 = grid[i + 1][j + 1];
+                int total = s1 + s2 + s3 + s4;
+                if (total == 4 * 'B' || total == 4 * 'W' || total == 3 * 'B' + 'W' || total == 3 * 'W' + 'B')
+                {
+                    return true;
+                }
+            }
+
+        return ans;
+    }
+
+    long long maxStrength(vector<int> &nums)
+    {
+
+        sort(nums.begin(), nums.end());
+        long all = 1;
+        vector<long> negtive;
+        vector<int> zero;
+        vector<long> unnegtive;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (nums[i] != 0)
+                all *= nums[i];
+            else
+                zero.push_back(nums[i]);
+
+            if (nums[i] < 0)
+                negtive.push_back(nums[i]);
+            if (nums[i] > 0)
+                unnegtive.push_back(nums[i]);
+        }
+        if (all >= 0 && nums.size() == 1)
+            return nums[0];
+
+        if (all >= 0 && zero.size() > 0 && unnegtive.size() == 0 &&
+            negtive.size() % 2 != 0)
+        {
+            return 0;
+        }
+        if (nums.size() == zero.size())
+            return 0;
+
+        if (all < 0)
+        {
+            if (negtive.size() == 1 && nums.size() == 1)
+                return nums[0];
+            int n = negtive.size();
+            all = all / negtive[n - 1];
+            if (negtive.size() == 1 && zero.size() > 0 &&
+                unnegtive.size() == 0)
+            {
+                all = 0;
+            }
+        }
+        return all;
+    }
+
+
+
+    
+
+    // -----------------------------------Cpp-----------------------------------//
     //
     //
     //
@@ -618,6 +711,9 @@ int main()
 
     double b = solutionTest.myPow(2, 3);
     cout << b << endl;
+    /////////////
+    int sss = 'B';
+    cout << "sss = " << 4 * sss << endl;
 
     return 0;
 }
