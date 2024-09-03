@@ -1,5 +1,5 @@
 # Code-of-Cpp
-code library  
+Code library  
 
 Here is my main cpp code and other code.
 
