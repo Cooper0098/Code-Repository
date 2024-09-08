@@ -676,7 +676,19 @@ public:
         return all;
     }
 
-
+    string clearDigits(string s)
+    {
+        string stk;
+        for (char c : s)
+        {
+            if (isdigit(c))
+                stk.pop_back();
+            else
+                stk.push_back(c);
+        }
+        return stk;
+    }
+    
 
     
 
@@ -714,6 +726,18 @@ int main()
     /////////////
     int sss = 'B';
     cout << "sss = " << 4 * sss << endl;
+    /////////////////////
+    cout << endl;
+    char ch1 = '5';
+    char ch2 = 'a';
+    char ch3 = '0';
+
+    // 检查字符是否为数字
+    std::cout << ch1 << " is digit? " << (isdigit(ch1) ? "Yes" : "No") << std::endl;
+    std::cout << ch2 << " is digit? " << (isdigit(ch2) ? "Yes" : "No") << std::endl;
+    std::cout << ch3 << " is digit? " << (isdigit(ch3) ? "Yes" : "No") << std::endl;
+
+
 
     return 0;
 }

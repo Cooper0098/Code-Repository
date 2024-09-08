@@ -18,36 +18,21 @@ typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
 typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 //--------------------------------模板--------------------------------//
 
-class Solution
-{
-public:
-};
+// class Solution
+// {
+// public:
+// };
 
 int main()
 {
-    // std::vector<int> arr = {5, 3, 8, 1, 2};
 
-    // std::sort(arr.begin(), arr.end(), std::greater<int>());
+    for (int i = 0; i < 10; i++)
+    {
+        cout << i << endl; 
+    }
 
-    // for (int num : arr)
-    // {
-    //     std::cout << num << " "<<endl;
-    // }
 
-    int *a;
     
-
-    int b = 100;
-    a = &b;
-
-    int c = 0;
-
-    cout << *a << endl;
-    cout << a << endl;
-    *a = 90;
-    // a = a + 1;
-    cout << *a  << endl;
-    cout << b << endl;
 
     return 0;
     
