@@ -688,9 +688,66 @@ public:
         }
         return stk;
     }
-    
 
-    
+    vector<int> sortedSquares(vector<int> &nums)
+    {
+        int idx = 0;
+        vector<int> ans;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (nums[i] > 0)
+            {
+                idx = i;
+                break;
+            }
+        }
+        for (int i = idx - 1; i >= 0; i--)
+        {
+            ans.push_back(nums[i] * nums[i]);
+        }
+        for (int i = idx; i < nums.size(); i++)
+        {
+            ans.push_back(nums[i] * nums[i]);
+        }
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+
+    ListNode *mergeNodes(ListNode *head)
+    {
+        ListNode *left = nullptr, *right = nullptr;
+        left = head->next;
+        while (left) // 遍历链表
+        {
+            right = left->next;
+            while (right->val)
+            {
+                left->val += right->val;
+                right = right->next;
+            }
+            left->next = right->next;
+            left = left->next;
+        }
+        return head->next;
+    }
+
+    bool find132pattern(vector<int> &nums)
+    {
+        int right = INT_MIN;
+        stack<int> stk;
+        for (int i = nums.size() - 1; i >= 0;i--)
+        {
+            if(nums[i] < right )
+                return true;
+                while(stk.size()&& stk.top() <nums[i] )
+                {
+                    right = max(right, stk.top());
+                    stk.pop();
+                }
+                stk.push(nums[i]);
+        }
+        return false;
+    }
 
     // -----------------------------------Cpp-----------------------------------//
     //
@@ -736,8 +793,6 @@ int main()
     std::cout << ch1 << " is digit? " << (isdigit(ch1) ? "Yes" : "No") << std::endl;
     std::cout << ch2 << " is digit? " << (isdigit(ch2) ? "Yes" : "No") << std::endl;
     std::cout << ch3 << " is digit? " << (isdigit(ch3) ? "Yes" : "No") << std::endl;
-
-
 
     return 0;
 }

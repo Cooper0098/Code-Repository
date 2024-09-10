@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"sort"
 	"time"
 )
 
@@ -76,6 +77,41 @@ func maxConsecutiveAnswers(answerKey string, k int) int {
 	}
 
 	return ans
+
+}
+
+func sortedSquares(nums []int) []int {
+
+	for i := range nums {
+		nums[i] = nums[i] * nums[i]
+	}
+	sort.Ints(nums)
+
+	return nums
+
+}
+
+// ----------------------------------- 链表 --------------------------------//
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+//-------------------------------------------------------------------//
+
+func mergeNodes(head *ListNode) *ListNode {
+	tail := head
+	for cur := head.Next; cur.Next != nil; cur = cur.Next {
+		if cur.Val != 0 {
+			tail.Val += cur.Val
+		} else {
+
+			tail = tail.Next
+			tail.Val = 0
+		}
+	}
+	tail.Next = nil
+	return head
 
 }
 
