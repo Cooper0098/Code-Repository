@@ -76,7 +76,9 @@
         "map": "cpp",
         "cstdarg": "cpp",
         "semaphore": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     },
     "python.testing.unittestArgs": [
         "-v",

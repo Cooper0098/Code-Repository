@@ -735,19 +735,88 @@ public:
     {
         int right = INT_MIN;
         stack<int> stk;
-        for (int i = nums.size() - 1; i >= 0;i--)
+        for (int i = nums.size() - 1; i >= 0; i--)
         {
-            if(nums[i] < right )
+            if (nums[i] < right)
                 return true;
-                while(stk.size()&& stk.top() <nums[i] )
-                {
-                    right = max(right, stk.top());
-                    stk.pop();
-                }
-                stk.push(nums[i]);
+            while (stk.size() && stk.top() < nums[i])
+            {
+                right = max(right, stk.top());
+                stk.pop();
+            }
+            stk.push(nums[i]);
         }
         return false;
     }
+
+    int maxNumOfMarkedIndices(vector<int> &nums) // 没写好, 最后2个样例没过. 2576. 求出最多标记下标
+    {
+        int ans = 0;
+        sort(nums.begin(), nums.end());
+
+        int jj = nums.size() - 1;
+        for (int i = nums.size() - 2; i >= 0; i--)
+        {
+            int num2;
+            num2 = nums[i] * 2;
+
+            if (num2 <= nums[jj])
+            {
+                nums[jj] = 0;
+                jj--;
+                nums[i] = 0;
+                ans += 2;
+            }
+        }
+        return ans;
+    }
+
+    string removeStars(string s)
+    {
+
+        string ans;
+        for (char c : s)
+        {
+            if (c != '*')
+            {
+                ans.push_back(c);
+            }
+            else
+            {
+                ans.pop_back();
+            }
+        }
+        return ans;
+    }
+
+    vector<vector<int>> merge(vector<vector<int>> &intervals)
+    {
+
+        vector<vector<int>> ans;
+        if (intervals.empty())
+            return ans;
+
+        sort(intervals.begin(), intervals.end());
+
+        int l = intervals[0][0], r = intervals[0][1]; // 左右端点
+
+        for (int i = 1; i < intervals.size(); i++)
+        {
+            if (intervals[i][0] > r)
+            {
+                ans.push_back({l, r});
+                l = intervals[i][0], r = intervals[i][1];
+            }
+            else
+            {
+                r = max(r, intervals[i][1]);
+            }
+        }
+        ans.push_back({l, r});
+        return ans;
+    }
+
+    
 
     // -----------------------------------Cpp-----------------------------------//
     //
@@ -783,8 +852,11 @@ int main()
     /////////////
     int sss = 'B';
     cout << "sss = " << 4 * sss << endl;
+
+    cout << "---------------------------------------" << endl;
+
     /////////////////////
-    cout << endl;
+
     char ch1 = '5';
     char ch2 = 'a';
     char ch3 = '0';
@@ -793,6 +865,8 @@ int main()
     std::cout << ch1 << " is digit? " << (isdigit(ch1) ? "Yes" : "No") << std::endl;
     std::cout << ch2 << " is digit? " << (isdigit(ch2) ? "Yes" : "No") << std::endl;
     std::cout << ch3 << " is digit? " << (isdigit(ch3) ? "Yes" : "No") << std::endl;
+    cout << "---------------------------------------" << endl;
+    //////////////////////
 
     return 0;
 }
