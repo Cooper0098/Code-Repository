@@ -139,7 +139,21 @@ func main() {
 
 	// fmt.Printf("输入数组: %v, 目标值: %d, 结果: %v\n", nums, target, result)
 
+	fmt.Print("---------------------------\n")
+
 	currentTime := time.Now()
 	fmt.Println("Current time:", currentTime)
-	//////////
+
+	fmt.Print("---------------------------\n")
+
+	// for i := 1; i <= 9; i++ { // i 控制行，以及计算的最大值
+	// 	for j := 1; j <= i; j++ { // j 控制每行的计算个数
+	// 		fmt.Printf("%d*%d=%d ", j, i, j*i)
+	// 	}
+	// 	fmt.Println(".")
+	// } //乘法表
+	fmt.Print("---------------------------\n")
+
+
+	fmt.Print("---------------------------\n")
 }

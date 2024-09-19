@@ -11,6 +11,8 @@
 #include <functional>
 #include <numeric>
 #include <ranges>
+#include <memory>
+#include <queue>
 using namespace std;
 typedef long long ll;       // 定义long long类型的简写为ll
 typedef long double ld;     // 定义long double类型的简写为ld
@@ -816,7 +818,88 @@ public:
         return ans;
     }
 
-    
+    int distanceBetweenBusStops(vector<int> &distance, int start, int destination)
+    {
+        int ans = 0;
+
+        if (start > destination)
+            swap(start, destination);
+        int sum = 0;
+        for (auto x : distance)
+            sum += x;
+        for (int i = start; i < destination; i++)
+            ans += distance[i];
+
+        ans = min(ans, sum - ans);
+
+        return ans;
+    }
+
+    int numBusesToDestination(vector<vector<int>> &routes, int source, int target)
+    {
+        if (source == target)
+            return 0;
+
+        int ans = 0;
+        int n = routes.size();
+        unordered_map<int, vector<int>> g;
+        vector<int> dist(n, 1e8);
+        queue<int> q;
+        for (int i = 0; i < n; i++)
+        {
+            for (int x : routes[i])
+            {
+                if (x == source)
+                {
+                    dist[i] = 1;
+                    q.push(i);
+                }
+                g[x].push_back(i);
+            }
+        }
+        while (q.size())
+        {
+            int t = q.front();
+            q.pop();
+            for (auto x : routes[t])
+            {
+                if (x == target)
+                    return dist[t];
+                for (auto y : g[x])
+                {
+                    if (dist[y] > dist[t] + 1)
+                    {
+                        dist[y] = dist[t] + 1;
+                        q.push(y);
+                    }
+                }
+                g.erase(x);
+            }
+        }
+        return -1;
+    }
+
+    int longestContinuousSubstring(string s)
+    {
+
+        int ans = 1;
+        int left = 1;
+
+        for (int i = 1; i < s.size(); i++)
+        {
+            if (s[i - 1] + 1 == s[i])
+            {
+                left++;
+            }
+            else
+            {
+                left = 1;
+            }
+            ans = max(ans, left);
+        }
+
+        return ans;
+    }
 
     // -----------------------------------Cpp-----------------------------------//
     //
