@@ -901,6 +901,37 @@ public:
         return ans;
     }
 
+
+    int countSpecialNumbers(int n) {
+
+
+        string s = to_string(n);
+        int memo[s.size()][1 << 10];
+        memset(memo, -1, sizeof(memo));
+        auto dfs = [&](int i, int mask, bool is_num, bool is_limit, auto &&dfs) -> int
+        {
+            if(i>= s.size())
+                return is_num;
+            if (is_num && !is_num && memo[i][mask] != -1)
+                return memo[i][mask];
+            int ans = 0;
+            if (!is_num)
+                ans += dfs(i + 1, mask, false, false, dfs);
+            int up = is_limit ? s[i] - '0' : 9;
+            for (int d = 1 - is_num; d <= up; d++)
+            {
+                if ((mask >> d) & 1)
+                    continue;
+                ans += dfs(i + 1, mask | 1 << d, true, is_limit && d == up, dfs);
+
+            }
+                return memo[i][mask] = ans;
+        };
+        return dfs(0, 0, false, true, dfs);
+    }
+
+
+
     // -----------------------------------Cpp-----------------------------------//
     //
     //
