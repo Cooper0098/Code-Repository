@@ -115,6 +115,19 @@ func mergeNodes(head *ListNode) *ListNode {
 
 }
 
+func edgeScore(edges []int) int {
+
+	ans := 0
+	score := make([]int, len(edges))
+	for i, to := range edges {
+		score[to] += i
+		if score[to] > score[ans] || score[to] == score[ans] && to < ans {
+			ans = to
+		}
+	}
+	return ans
+}
+
 // --------------------------------------Go-------------------------------------//
 //
 //
@@ -153,7 +166,6 @@ func main() {
 	// 	fmt.Println(".")
 	// } //乘法表
 	fmt.Print("---------------------------\n")
-
 
 	fmt.Print("---------------------------\n")
 }

@@ -930,6 +930,20 @@ public:
         return dfs(0, 0, false, true, dfs);
     }
 
+    int edgeScore(vector<int>& edges) {
+        int ans = 0;
+        int n = edges.size();
+        vector<long> score(n);
+        for (int i = 0; i < n; i++)
+        {
+            int t = edges[i];
+            score[t] += i;
+
+            if(score[t] > score[ans] || score[t] == score[ans] && t < ans)
+                ans = t;
+        }
+        return ans;
+    }
 
 
     // -----------------------------------Cpp-----------------------------------//
