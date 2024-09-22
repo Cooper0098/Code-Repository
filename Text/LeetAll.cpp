@@ -901,36 +901,35 @@ public:
         return ans;
     }
 
+    // int countSpecialNumbers(int n)
+    // {
 
-    int countSpecialNumbers(int n) {
+    //     string s = to_string(n);
+    //     int memo[s.size()][1 << 10];
+    //     memset(memo, -1, sizeof(memo));
+    //     auto dfs = [&](int i, int mask, bool is_num, bool is_limit, auto &&dfs) -> int
+    //     {
+    //         if (i >= s.size())
+    //             return is_num;
+    //         if (is_num && !is_num && memo[i][mask] != -1)
+    //             return memo[i][mask];
+    //         int ans = 0;
+    //         if (!is_num)
+    //             ans += dfs(i + 1, mask, false, false, dfs);
+    //         int up = is_limit ? s[i] - '0' : 9;
+    //         for (int d = 1 - is_num; d <= up; d++)
+    //         {
+    //             if ((mask >> d) & 1)
+    //                 continue;
+    //             ans += dfs(i + 1, mask | 1 << d, true, is_limit && d == up, dfs);
+    //         }
+    //         return memo[i][mask] = ans;
+    //     };
+    //     return dfs(0, 0, false, true, dfs);
+    // }
 
-
-        string s = to_string(n);
-        int memo[s.size()][1 << 10];
-        memset(memo, -1, sizeof(memo));
-        auto dfs = [&](int i, int mask, bool is_num, bool is_limit, auto &&dfs) -> int
-        {
-            if(i>= s.size())
-                return is_num;
-            if (is_num && !is_num && memo[i][mask] != -1)
-                return memo[i][mask];
-            int ans = 0;
-            if (!is_num)
-                ans += dfs(i + 1, mask, false, false, dfs);
-            int up = is_limit ? s[i] - '0' : 9;
-            for (int d = 1 - is_num; d <= up; d++)
-            {
-                if ((mask >> d) & 1)
-                    continue;
-                ans += dfs(i + 1, mask | 1 << d, true, is_limit && d == up, dfs);
-
-            }
-                return memo[i][mask] = ans;
-        };
-        return dfs(0, 0, false, true, dfs);
-    }
-
-    int edgeScore(vector<int>& edges) {
+    int edgeScore(vector<int> &edges)
+    {
         int ans = 0;
         int n = edges.size();
         vector<long> score(n);
@@ -939,12 +938,30 @@ public:
             int t = edges[i];
             score[t] += i;
 
-            if(score[t] > score[ans] || score[t] == score[ans] && t < ans)
+            if (score[t] > score[ans] || score[t] == score[ans] && t < ans)
                 ans = t;
         }
         return ans;
     }
 
+    bool reportSpam(vector<string> &message, vector<string> &bannedWords)
+    {
+
+        unordered_set<string> banSet(bannedWords.begin(), bannedWords.end());
+        int cnt = 0;
+        for (const auto &word : message)
+        {
+            if (banSet.count(word) > 0)
+            {
+                cnt++;
+            }
+            if (cnt >= 2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // -----------------------------------Cpp-----------------------------------//
     //
@@ -965,36 +982,75 @@ int main()
 {
 
     Solution solutionTest;
+    cout << "---------------------------------------" << endl;
 
-    // Test case 1
-    vector<int> nums1_1 = {1, 2, 2, 1};
-    vector<int> nums2_1 = {2, 2};
-    vector<int> result1 = solutionTest.findIntersectionValues(nums1_1, nums2_1);
-    cout << "Test Case 1: [" << result1[0] << ", " << result1[1] << "]" << endl; // Expected output: [2, 2]
-
-    int a = solutionTest.fib(2);
-    cout << a << endl;
-
-    double b = solutionTest.myPow(2, 3);
-    cout << b << endl;
-    /////////////
-    int sss = 'B';
-    cout << "sss = " << 4 * sss << endl;
+    // // Test case 1
+    // vector<int> nums1_1 = {1, 2, 2, 1};
+    // vector<int> nums2_1 = {2, 2};
+    // vector<int> result1 = solutionTest.findIntersectionValues(nums1_1, nums2_1);
+    // cout << "Test Case 1: [" << result1[0] << ", " << result1[1] << "]" << endl; // Expected output: [2, 2]
 
     cout << "---------------------------------------" << endl;
 
-    /////////////////////
+    // int a = solutionTest.fib(2);
+    // cout << a << endl;
 
-    char ch1 = '5';
-    char ch2 = 'a';
-    char ch3 = '0';
+    // double b = solutionTest.myPow(2, 3);
+    // cout << b << endl;
 
+    cout << "---------------------------------------" << endl;
+
+    // int sss = 'B';
+    // cout << "sss = " << 4 * sss << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    // char ch1 = '5';
+    // char ch2 = 'a';
+    // char ch3 = '0';
     // 检查字符是否为数字
-    std::cout << ch1 << " is digit? " << (isdigit(ch1) ? "Yes" : "No") << std::endl;
-    std::cout << ch2 << " is digit? " << (isdigit(ch2) ? "Yes" : "No") << std::endl;
-    std::cout << ch3 << " is digit? " << (isdigit(ch3) ? "Yes" : "No") << std::endl;
-    cout << "---------------------------------------" << endl;
-    //////////////////////
+    // cout << ch1 << " is digit? " << (isdigit(ch1) ? "Yes" : "No") << std::endl;
+    // cout << ch2 << " is digit? " << (isdigit(ch2) ? "Yes" : "No") << std::endl;
+    // cout << ch3 << " is digit? " << (isdigit(ch3) ? "Yes" : "No") << std::endl;
 
+    cout << "---------------------------------------" << endl;
+
+    vector<string> message = {"hello", "world", "leetcode"};
+    vector<string> bannedWords = {"world", "hello"};
+
+    bool result = solutionTest.reportSpam(message, bannedWords);
+    cout << boolalpha << result << endl; // 输出: true
+    cout << "---------------------------------------" << endl;
+
+
+    
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    cout << "---------------------------------------" << endl;
+
+    // cout << "---------------------------------------" << endl;
+
+    // cout << "---------------------------------------" << endl;
+
+    // cout << "---------------------------------------" << endl;
     return 0;
 }

@@ -128,6 +128,28 @@ func edgeScore(edges []int) int {
 	return ans
 }
 
+func reportSpam(message []string, bannedWords []string) bool {
+
+	// 将 bannedWords 转换为 set (使用 map 实现)
+	banSet := make(map[string]struct{})
+	for _, word := range bannedWords { //忽视索引
+		banSet[word] = struct{}{}
+	}
+
+	// 统计在 message 中出现的禁用词数量
+	cnt := 0
+	for _, word := range message {
+		if _, found := banSet[word]; found {
+			cnt++
+		}
+		if cnt >= 2 {
+			return true
+		}
+	}
+
+	return false
+}
+
 // --------------------------------------Go-------------------------------------//
 //
 //
