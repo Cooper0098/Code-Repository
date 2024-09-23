@@ -963,6 +963,21 @@ public:
         return false;
     }
 
+    int maxScoreSightseeingPair(vector<int> &values)
+    {
+
+        int ans = 0;
+        int maxv = values[0];
+
+        for (int i = 1; i < values.size();i++)
+        {
+            ans = max(values[i] - i + maxv, ans);
+            maxv = max(maxv, values[i] + i);
+
+        }
+        return ans;
+    }
+
     // -----------------------------------Cpp-----------------------------------//
     //
     //
@@ -1021,9 +1036,6 @@ int main()
     bool result = solutionTest.reportSpam(message, bannedWords);
     cout << boolalpha << result << endl; // 输出: true
     cout << "---------------------------------------" << endl;
-
-
-    
 
     cout << "---------------------------------------" << endl;
 

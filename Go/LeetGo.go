@@ -150,6 +150,19 @@ func reportSpam(message []string, bannedWords []string) bool {
 	return false
 }
 
+func maxScoreSightseeingPair(values []int) int {
+
+	ans := 0
+	maxv := values[0]
+
+	for i := 1; i < len(values); i++ {
+		ans = max(values[i]-i+maxv, ans)
+		maxv = max(maxv, values[i]+i)
+	}
+
+	return ans
+}
+
 // --------------------------------------Go-------------------------------------//
 //
 //
@@ -166,7 +179,8 @@ func reportSpam(message []string, bannedWords []string) bool {
 func main() {
 
 	fmt.Println("Hello, World!")
-	///////////////////////////////////////////////////////////////////////
+	fmt.Print("---------------------------\n")
+
 	// 测试用例
 	// nums := []int{2, 7, 11, 15}
 	// target := 9
@@ -177,6 +191,7 @@ func main() {
 	fmt.Print("---------------------------\n")
 
 	currentTime := time.Now()
+
 	fmt.Println("Current time:", currentTime)
 
 	fmt.Print("---------------------------\n")
@@ -190,4 +205,24 @@ func main() {
 	fmt.Print("---------------------------\n")
 
 	fmt.Print("---------------------------\n")
+
+	fmt.Print("---------------------------\n")
+
+	fmt.Print("---------------------------\n")
+
+	fmt.Print("---------------------------\n")
+
+	fmt.Print("---------------------------\n")
+
+	fmt.Print("---------------------------\n")
+
+	fmt.Print("---------------------------\n")
+
+	fmt.Print("---------------------------\n")
+
+	// fmt.Print("---------------------------\n")
+
+	// fmt.Print("---------------------------\n")
+
+	// fmt.Print("---------------------------\n")
 }
