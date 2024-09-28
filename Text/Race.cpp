@@ -23,11 +23,6 @@ typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 // public:
 // };
 
-int n ;
-const int N = 100005;
-int path[N];
-bool st[N];
-
 
 int main()
 {
