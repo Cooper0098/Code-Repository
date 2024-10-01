@@ -163,6 +163,16 @@ func maxScoreSightseeingPair(values []int) int {
 	return ans
 }
 
+
+
+func Factorial(n uint64)(result uint64) {
+    if (n > 0) {
+        result = n * Factorial(n-1)
+        return result
+    }
+    return 1
+}
+
 // --------------------------------------Go-------------------------------------//
 //
 //
@@ -203,6 +213,14 @@ func main() {
 	// 	fmt.Println(".")
 	// } //乘法表
 	fmt.Print("---------------------------\n")
+
+    var i interface{} = "Hello, World"
+    str, ok := i.(string)
+    if ok {
+        fmt.Printf("'%s' is a string\n", str)
+    } else {
+        fmt.Println("conversion failed")
+    }
 
 	fmt.Print("---------------------------\n")
 

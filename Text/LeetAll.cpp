@@ -14,11 +14,11 @@
 #include <memory>
 #include <queue>
 using namespace std;
-typedef long long ll;       // 定义long long类型的简写为ll
-typedef long double ld;     // 定义long double类型的简写为ld
-typedef pair<int, int> pii; // 定义pair<int, int>类型的简写为pii
-typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
-typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
+// typedef long long ll;       // 定义long long类型的简写为ll
+// typedef long double ld;     // 定义long double类型的简写为ld
+// typedef pair<int, int> pii; // 定义pair<int, int>类型的简写为pii
+// typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
+// typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 //--------------------------------模板--------------------------------//
 
 struct ListNode
@@ -969,33 +969,47 @@ public:
         int ans = 0;
         int maxv = values[0];
 
-        for (int i = 1; i < values.size();i++)
+        for (int i = 1; i < values.size(); i++)
         {
             ans = max(values[i] - i + maxv, ans);
             maxv = max(maxv, values[i] + i);
-
         }
         return ans;
     }
 
+    int differenceOfSum(vector<int> &nums)
+    {
 
-    int differenceOfSum(vector<int>& nums) {
-
-        int ans = 0 ;
-        for(int i = 0 ; i < nums.size() ; i++)
+        int ans = 0;
+        for (int i = 0; i < nums.size(); i++)
         {
             ans += nums[i];
-            while(nums[i])
+            while (nums[i])
             {
                 ans -= nums[i] % 10;
                 nums[i] /= 10;
             }
-
-            
         }
         return ans;
     }
 
+    int timeRequiredToBuy(vector<int> &tickets, int k)
+    {
+
+        int i = 0, ans = 0;
+
+        while (tickets[k] != 0)
+        {
+            if (tickets[i] != 0)
+            {
+                tickets[i]--;
+                ans++;
+            }
+
+            i = (i + 1) % tickets.size();
+        }
+        return ans;
+    }
 
     // -----------------------------------Cpp-----------------------------------//
     //
