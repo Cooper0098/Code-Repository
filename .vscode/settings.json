@@ -78,7 +78,8 @@
         "semaphore": "cpp",
         "cinttypes": "cpp",
         "ranges": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "stack": "cpp"
     },
     "python.testing.unittestArgs": [
         "-v",
