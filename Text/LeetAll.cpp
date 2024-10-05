@@ -9,7 +9,7 @@
 #include <unordered_map> // 哈希表, 存储的是键值对. 每个元素由一个键和一个与之关联的值组成, 键是唯一的, 但值可以重复. 适合用于需要根据键快速查找值的场景
 #include <unordered_set> // 哈希表,存储的是唯一元素的集合. 每个元素都是值, 不关联任何其他数据. 适合用于需要存储不重复的元素的场景
 //------------------------------------------//
-#include <memory> // 内存管理
+#include <memory> // 智能指针
 #include <functional>
 #include <numeric>
 #include <ranges>
@@ -189,6 +189,7 @@ public:
         return ans;
     }
 
+public:
     int maximumSum(vector<int> &arr) // dp-algorithm
     {
         int ans = INT_MIN, n = arr.size();
@@ -490,6 +491,7 @@ public:
         return f[n][m];
     }
 
+private:
     bool isArraySpecial(vector<int> &nums)
     {
         if (nums.size() == 1)
@@ -534,6 +536,7 @@ public:
         return ans;
     }
 
+public:
     bool checkRecord(string s)
     {
         bool ans = true;
@@ -902,33 +905,6 @@ public:
         return ans;
     }
 
-    // int countSpecialNumbers(int n)
-    // {
-
-    //     string s = to_string(n);
-    //     int memo[s.size()][1 << 10];
-    //     memset(memo, -1, sizeof(memo));
-    //     auto dfs = [&](int i, int mask, bool is_num, bool is_limit, auto &&dfs) -> int
-    //     {
-    //         if (i >= s.size())
-    //             return is_num;
-    //         if (is_num && !is_num && memo[i][mask] != -1)
-    //             return memo[i][mask];
-    //         int ans = 0;
-    //         if (!is_num)
-    //             ans += dfs(i + 1, mask, false, false, dfs);
-    //         int up = is_limit ? s[i] - '0' : 9;
-    //         for (int d = 1 - is_num; d <= up; d++)
-    //         {
-    //             if ((mask >> d) & 1)
-    //                 continue;
-    //             ans += dfs(i + 1, mask | 1 << d, true, is_limit && d == up, dfs);
-    //         }
-    //         return memo[i][mask] = ans;
-    //     };
-    //     return dfs(0, 0, false, true, dfs);
-    // }
-
     int edgeScore(vector<int> &edges)
     {
         int ans = 0;
@@ -1012,15 +988,7 @@ public:
         return ans;
     }
 
-    int findTargetSumWays(vector<int> &nums, int target)
-    {
 
-        int ans = 0;
-
-        int neg = -1;
-
-        return ans;
-    }
 
     // -----------------------------------Cpp-----------------------------------//
     //
@@ -1041,72 +1009,56 @@ int main()
 {
 
     Solution solutionTest;
-    cout << "---------------------------------------" << endl;
+    cout << "-------------------------------" << endl;
 
-    // // Test case 1
-    // vector<int> nums1_1 = {1, 2, 2, 1};
-    // vector<int> nums2_1 = {2, 2};
-    // vector<int> result1 = solutionTest.findIntersectionValues(nums1_1, nums2_1);
-    // cout << "Test Case 1: [" << result1[0] << ", " << result1[1] << "]" << endl; // Expected output: [2, 2]
+    int fibnums = solutionTest.fib(3); // 第几个斐波那契数是什么
+    cout << fibnums << endl;
 
-    cout << "---------------------------------------" << endl;
+    double powNums = solutionTest.myPow(2, 3); // 求解快速幂次方
+    cout << powNums << endl;
 
-    // int a = solutionTest.fib(2);
-    // cout << a << endl;
-
-    // double b = solutionTest.myPow(2, 3);
-    // cout << b << endl;
-
-    cout << "---------------------------------------" << endl;
-
-    // int sss = 'B';
-    // cout << "sss = " << 4 * sss << endl;
-
-    cout << "---------------------------------------" << endl;
-
-    // char ch1 = '5';
-    // char ch2 = 'a';
-    // char ch3 = '0';
-    // 检查字符是否为数字
-    // cout << ch1 << " is digit? " << (isdigit(ch1) ? "Yes" : "No") << std::endl;
-    // cout << ch2 << " is digit? " << (isdigit(ch2) ? "Yes" : "No") << std::endl;
-    // cout << ch3 << " is digit? " << (isdigit(ch3) ? "Yes" : "No") << std::endl;
-
-    cout << "---------------------------------------" << endl;
+    cout << "-----------------------------" << endl;
 
     vector<string> message = {"hello", "world", "leetcode"};
     vector<string> bannedWords = {"world", "hello"};
 
-    bool result = solutionTest.reportSpam(message, bannedWords);
-    cout << boolalpha << result << endl; // 输出: true
-    cout << "---------------------------------------" << endl;
+    bool Spamresult = solutionTest.reportSpam(message, bannedWords);
+    cout << boolalpha << Spamresult << endl; // 输出: true
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    // cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    // cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
 
-    // cout << "---------------------------------------" << endl;
+    cout << "------------------------------" << endl;
+
+    cout << "------------------------------" << endl;
+
+    // cout << "--------------------------------" << endl;
+
+    // cout << "--------------------------------" << endl;
+
+    // cout << "--------------------------------" << endl;
     return 0;
 }

@@ -163,14 +163,28 @@ func maxScoreSightseeingPair(values []int) int {
 	return ans
 }
 
+func Factorial(n uint64) (result uint64) {
+	if n > 0 {
+		result = n * Factorial(n-1)
+		return result
+	}
+	return 1
+}
 
+func nthPersonGetsNthSeat(n int) float64 {
+	if n == 1 {
+		return 1
+	}
 
-func Factorial(n uint64)(result uint64) {
-    if (n > 0) {
-        result = n * Factorial(n-1)
-        return result
-    }
-    return 1
+	return 0.5
+
+}
+
+func say(s string) {
+	for i := 0; i < 5; i++ {
+		time.Sleep(100 * time.Millisecond)
+		fmt.Println(s)
+	}
 }
 
 // --------------------------------------Go-------------------------------------//
@@ -214,15 +228,10 @@ func main() {
 	// } //乘法表
 	fmt.Print("---------------------------\n")
 
-    var i interface{} = "Hello, World"
-    str, ok := i.(string)
-    if ok {
-        fmt.Printf("'%s' is a string\n", str)
-    } else {
-        fmt.Println("conversion failed")
-    }
-
 	fmt.Print("---------------------------\n")
+
+	go say("world")
+	say("hello")
 
 	fmt.Print("---------------------------\n")
 

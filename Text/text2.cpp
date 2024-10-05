@@ -22,5 +22,26 @@ typedef pair<ll, ll> pll;   // 定义pair<ll, ll>类型的简写为pll
 typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 //--------------------------------模板--------------------------------//
 
+int main()
+{
+    std::vector<int> numbers = {3, 1, 4, 1, 5, 9, 2, 6};
 
+    // 使用 min_element 查找最小元素
+    auto minIt = std::min_element(numbers.begin(), numbers.end());
 
+    int minValue = *minIt;
+
+    if (minIt != numbers.end())
+    {
+        // 使用解引用获取最小值
+        std::cout << "Minimum value: " << minValue << std::endl;
+    }
+    else
+    {
+        std::cout << "The range is empty." << std::endl;
+    }
+
+    // cout << typeid(minIt).name()<< endl;
+
+    return 0;
+}
