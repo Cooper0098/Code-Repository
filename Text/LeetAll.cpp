@@ -1014,13 +1014,169 @@ public:
         return start;
     }
 
+    int numberOfPairs(vector<int> &nums1, vector<int> &nums2, int k)
+    {
 
+        int ans = 0;
+        int n = nums1.size(), m = nums2.size();
 
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (nums1[i] % (nums2[j] * k) == 0)
+                {
+                    ans++;
+                }
+            }
+        }
 
+        return ans;
+    }
+
+    long long numberOfPairs_2(vector<int> &nums1, vector<int> &nums2, int k)
+    {
+        unordered_map<int, int> cnt;
+        for (int x : nums1)
+        {
+            if (x % k)
+                continue;
+            x = x / k;
+            for (int d = 1; d * d <= x; d++)
+            {
+                if (x % d)
+                    continue;
+
+                cnt[d]++;
+                if (d * d < x)
+                    cnt[x / d]++;
+            }
+        }
+
+        long long ans = 0;
+        for (int x : nums2)
+        {
+
+            auto it = cnt.find(x);
+            ans += (it != cnt.end()) ? cnt[x] : 0;
+        }
+        return ans;
+    }
+
+    int duplicateNumbersXOR(vector<int> &nums)
+    {
+
+        unordered_set<int> mapp;
+
+        int ans = 0;
+
+        for (auto x : nums)
+        {
+            if (mapp.find(x) != mapp.end())
+            {
+                ans ^= x;
+            }
+            else
+            {
+                mapp.emplace(x);
+            }
+        }
+        return ans;
+    }
+
+    int superEggDrop(int k, int n) // 扔鸡蛋楼层
+    {
+
+        // f[i][j]  用j枚鸡蛋仍i次, 能得到的答案的最大高度 , f[i][j]累加高度, 直到刚好超过高度n
+
+        int f[10010][110];
+
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= k; j++)
+            {
+                f[i][j] = f[i - 1][j - 1] + 1 + f[i - 1][j];
+            }
+            if (f[i][k] >= n)
+                return i;
+        }
+
+        return -1;
+    }
+
+    int maxHeightOfTriangle(int red, int blue)
+    {
+
+        int ans = 0;
+
+        for (int d = 0; d < 2; d++)
+        {
+            int cnt[2] = {red, blue};
+            for (int i = 1, now = d;; i++, now ^= 1)
+            {
+                if (cnt[now] < i)
+                    break;
+                ans = max(ans, i);
+                cnt[now] -= i;
+            }
+        }
+        return ans;
+    }
+
+    double minimumAverage(vector<int> &nums)
+    {
+
+        sort(nums.begin(), nums.end());
+
+        vector<double> container;
+
+        int n = nums.size();
+
+        int l = 0, r = n - 1;
+        for (int i = 0; i < (n / 2); i++)
+        {
+            container.push_back((nums[l] + nums[r]));
+            l++, r--;
+        }
+        sort(container.begin(), container.end());
+
+        return container[0] / 2.0;
+    }
+
+    int smallestRangeI(vector<int> &nums, int k)
+    {
+        int ans = 0;
+        // int negK = 0-k;
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+
+        ans = nums[n - 1] - nums[0] - 2 * k;
+        if (ans <= 0)
+            ans = 0;
+
+        return ans;
+    }
+
+    int smallestRangeII(vector<int> &nums, int k)
+    {
+
+        int ans = 0;
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+
+        ans = nums[n - 1] - nums[0];
+        for (int i = 1; i < n; i++)
+        {
+            int mXnum = max(nums[i - 1] + k, nums[n - 1] - k);
+            int mInum = min(nums[0] + k, nums[i] - k);
+            ans = min(ans, mXnum - mInum);
+        }
+
+        return ans;
+    }
 
 
     
-
     // -----------------------------------Cpp-----------------------------------//
     //
     //
