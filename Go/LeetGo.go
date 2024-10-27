@@ -187,6 +187,25 @@ func say(s string) {
 	}
 }
 
+func countCompleteDayPairs(hours []int) int {
+
+	ans := 0
+
+	j := 1
+
+	for i := 0; i < len(hours); i++ {
+		j = i + 1
+		for ; j < len(hours); j++ {
+			if (hours[i]+hours[j])%24 == 0 {
+				ans++
+			}
+		}
+	}
+
+	return ans
+
+}
+
 // --------------------------------------Go-------------------------------------//
 //
 //
