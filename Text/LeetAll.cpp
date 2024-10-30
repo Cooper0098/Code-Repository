@@ -1225,9 +1225,43 @@ private:
     }
 
 public:
+    string getSmallestString(string s)
+    {
+
+        for (int i = 1; i < s.size(); i++)
+        {
+            int r = s[i] - '0';
+            int l = s[i - 1] - '0';
+            if ((l % 2 == 0) ^ (r % 2 == 0))
+            {
+
+                continue;
+            }
+            else
+            {
+
+                if (l > r)
+                {
+                    // char cur;
+                    // cur = s[i];
+
+                    // s[i] = s[i - 1];
+                    // s[i - 1] = cur;
+
+                    swap(s[i - 1], s[i]);
+                    break;
+                }
+                else
+                    continue;
+            }
+        }
+        return s;
+    }
 
 
 
+
+    
 
     // -----------------------------------Cpp-----------------------------------//
     //
