@@ -19,7 +19,7 @@ int main()
         cin >> b[i];
 
     // sort(a,a+n);
-    // sort(b,b+m);
+    // sort(b,b+m); //必须保证单调性
 
     for (int i = 0, j = m - 1; i < n; i++)
     {
