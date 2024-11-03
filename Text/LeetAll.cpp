@@ -14,6 +14,7 @@
 #include <numeric>
 #include <ranges>
 #include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
+#include <bitset>
 using namespace std;
 // typedef long long ll;       // 定义long long类型的简写为ll
 // typedef long double ld;     // 定义long double类型的简写为ld
@@ -1258,10 +1259,30 @@ public:
         return s;
     }
 
+    int minChanges(int n, int k)
+    {
+        int ans = 0; // 初始值设为0
 
+        // 将 n 和 k 转换为 64 位二进制
+        std::bitset<64> binaryN(n);
+        std::bitset<64> binaryK(k);
 
+        for (int i = 0; i < 64; i++)
+        {
+            // 如果 binaryN[i] 和 binaryK[i] 不同，并且 binaryN[i] 为 1
+            if ((binaryN[i] ^ binaryK[i]) && binaryN[i])
+            {
+                binaryN[i] = 0; // 将 binaryN[i] 置为 0
+                ans++;
+            }
+        }
 
-    
+        // 检查修改后的 binaryN 是否等于 binaryK
+        if (binaryN != binaryK)
+            return -1;
+
+        return ans;
+    }
 
     // -----------------------------------Cpp-----------------------------------//
     //
