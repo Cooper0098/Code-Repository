@@ -15,7 +15,9 @@
 #include <ranges>
 #include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
 #include <bitset>
+#include <cmath>
 using namespace std;
+
 // typedef long long ll;       // 定义long long类型的简写为ll
 // typedef long double ld;     // 定义long double类型的简写为ld
 // typedef pair<int, int> pii; // 定义pair<int, int>类型的简写为pii
@@ -1284,6 +1286,88 @@ public:
         return ans;
     }
 
+    bool MyisPerfer_Square(long long n)
+    {
+        long long sq = sqrt(n);
+        if (sq * sq == n)
+            return true;
+
+        return false;
+    }
+
+    bool judgeSquareSum(int c)
+    {
+
+        bool ans = false;
+
+        long long a;
+
+        for (a = 0; a * a <= c; a++)
+        {
+
+            long long n = c - (a * a);
+
+            if (MyisPerfer_Square(n))
+            {
+                ans = true;
+            }
+        }
+
+        return ans;
+    }
+
+    string losingPlayer(int x, int y)
+    {
+        string a = "Alice";
+        string b = "Bob";
+        int flag = 1;
+
+        while (x--)
+        {
+            y = y - 4;
+            if (y >= 0)
+            {
+                flag *= -1;
+            }
+        }
+        if (flag > 0)
+            return b;
+        else
+            return a;
+
+        return a;
+    }
+
+    vector<int> resultsArray(vector<int> &nums, int k)
+    {
+
+        int n = nums.size();
+        vector<int> ans;
+        vector<int> f(n);
+        f[0] = 1;
+
+        for (int i = 1; i < n; i++)
+        {
+
+            //  f[i] = (nums[i] == nums[i - 1] + 1) ? (f[i - 1] + 1) : 1;
+
+            if (nums[i] == nums[i - 1] + 1)
+            {
+                f[i] = f[i - 1] + 1;
+            }
+            else
+            {
+                f[i] = 1;
+            }
+        }
+
+        for (int i = k - 1; i < n; i++)
+        {
+            ans.push_back(f[i] >= k ? nums[i] : -1);
+        }
+        return ans;
+    }
+
     // -----------------------------------Cpp-----------------------------------//
     //
     //
@@ -1296,6 +1380,76 @@ public:
     //
     //
 };
+
+class NeighborSum
+{
+private:
+    vector<vector<int>> grid;                       // 存储原始的二维数组
+    unordered_map<int, pair<int, int>> positionMap; // 记录每个值的坐标位置
+
+public:
+    NeighborSum(vector<vector<int>> &grid)
+    {
+        this->grid = grid;
+        int n = grid.size();
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < n; ++j)
+            {
+                positionMap[grid[i][j]] = {i, j}; // 存储每个值的坐标
+            }
+        }
+    }
+
+    int adjacentSum(int value)
+    {
+        if (positionMap.find(value) == positionMap.end())
+            return 0;
+        auto [x, y] = positionMap[value];
+        int n = grid.size();
+        int sum = 0;
+
+        // 上下左右相邻位置
+        vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        for (auto [dx, dy] : directions)
+        {
+            int nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+            {
+                sum += grid[nx][ny];
+            }
+        }
+        return sum;
+    }
+
+    int diagonalSum(int value)
+    {
+        if (positionMap.find(value) == positionMap.end())
+            return 0;
+        auto [x, y] = positionMap[value];
+        int n = grid.size();
+        int sum = 0;
+
+        // 左上、右上、左下、右下对角线相邻位置
+        vector<pair<int, int>> diagonals = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+        for (auto [dx, dy] : diagonals)
+        {
+            int nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < n && ny >= 0 && ny < n)
+            {
+                sum += grid[nx][ny];
+            }
+        }
+        return sum;
+    }
+};
+
+/**
+ * 使用方法：
+ * NeighborSum* obj = new NeighborSum(grid);
+ * int adjSum = obj->adjacentSum(value);
+ * int diagSum = obj->diagonalSum(value);
+ */
 
 // -----------------------------------------C++--------------------------------------//
 

@@ -218,6 +218,35 @@ func maxEnergyBoost(energyDrinkA []int, energyDrinkB []int) int64 {
 	return int64(max(f, g))
 }
 
+func losingPlayer(x int, y int) string {
+
+	a := "Alice"
+
+	b := "Bob"
+
+	flag := 1
+
+	for ; x > 0; x-- {
+		y = y - 4
+		if y >= 0 {
+			flag *= -1
+
+		}
+	}
+
+	if flag > 0 {
+
+		return b
+
+	} else {
+
+		return a
+	}
+
+}
+
+
+
 
 
 // --------------------------------------Go-------------------------------------//
