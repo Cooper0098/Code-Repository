@@ -24,57 +24,71 @@ typedef vector<int> vi;     // 定义vector<int>类型的简写为vi
 
 //-------------------------------------------------------------------------//
 
+#include <algorithm>
 #include <iostream>
+#include <unordered_map>
 #include <vector>
-#include <string>
 
 using namespace std;
 
-int solution(int n, int k, const std::vector<int> &nums)
+int solution(int n, int H, int A, vector<int> h, vector<int> a)
 {
-    // Edit your code here
+    // write code here
+
+    int ans = 0;
 
     unordered_map<int, int> hashMap;
 
+    vector<int> Maxnum;
+
     for (int i = 0; i < n; i++)
     {
-        hashMap[nums[i]] = i;
+        Maxnum.push_back(max(h[i], a[i]));
     }
 
-    vector<int> copyNum(nums);
-
-    auto minX = min_element(copyNum.begin(), copyNum.end());
-    int idx = distance(copyNum.begin(), minX);
-
-    copyNum.erase(copyNum.begin() + idx);
-
-    // int ans = INT_MIN;
-
-    // for (int i = k - 1; i < copyNum.size(); i++)
-    // {
-    //     int cnt = 0;
-
-    //     for (int j = i - k + 1; j < k - 1; j++)
-    //     {
-    //         cnt += copyNum[j];
-    //     }
-    //     ans = max(ans, cnt);
-    // }
-
-    int window_sum = 0;
-    for (int i = 0; i < k; i++)
+    for (int i = 0; i < n; i++)
     {
-        window_sum += copyNum[i];
+        hashMap[i] = Maxnum[i];
     }
 
-    int ans = window_sum;
+    auto E_min = min(H, A);
 
-    // 滑动窗口，移动窗口的右端
-    for (int i = k; i < copyNum.size(); i++)
+    auto X_maxxxx = max_element(hashMap.begin(), hashMap.end());
+
+    for (auto x = hashMap.begin(); x != hashMap.end(); ++x)
     {
-        // 将窗口向右滑动，减去左边的元素，加入右边的新元素
-        window_sum += copyNum[i] - copyNum[i - k];
-        ans = std::max(ans, window_sum); // 更新最大值
+        if (E_min < x->second)
+        {
+            hashMap.erase(x->first);
+        }
+    }
+
+    int haN = hashMap.size();
+    // cout << haN << endl;
+    for (int i = 0; i < haN; i++)
+    {
+        auto X_max = max_element(hashMap.begin(), hashMap.end());
+
+        int idx = X_max->first, b = X_max->second;
+
+        if (E_min < b)
+        {
+            // hashMap.erase(idx);
+            continue;
+
+            // X_max = max_element(hashMap.begin(), hashMap.end());
+            // b = X_max->second;
+        }
+
+        // if (E_min >= b)
+        else
+        {
+            E_min = min(h[idx], a[idx]);
+            ans++;
+            //   cout << E_min << endl;
+            //   cout << idx + 100 << endl;
+            hashMap.erase(idx);
+        }
     }
 
     return ans;
@@ -82,8 +96,8 @@ int solution(int n, int k, const std::vector<int> &nums)
 
 int main()
 {
-    // Add your test cases here
-    std::cout << (solution(5, 3, {2, 1, 3, -1, 4}) == 8) << std::endl;
-
+    cout << (solution(3, 4, 5, {1, 2, 3}, {3, 2, 1}) == 1) << endl;
+    cout << (solution(5, 10, 10, {6, 9, 12, 4, 7}, {8, 9, 10, 2, 5}) == 2) << endl;
+    cout << (solution(4, 20, 25, {10, 15, 18, 22}, {12, 18, 20, 26}) == 3) << endl;
     return 0;
 }

@@ -1368,6 +1368,23 @@ public:
         return ans;
     }
 
+    int singleNonDuplicate(vector<int> &nums)
+    {
+        nums.push_back(nums.back() + 1);
+
+        int l = 0, r = nums.size() / 2 - 1; // 按照2个一组的组号来二分
+
+        while (l < r)
+        {
+            int mid = l + r >> 1;
+            if (nums[mid * 2] != nums[mid * 2 + 1])
+                r = mid;
+            else
+                l = mid + 1;
+        }
+        return nums[r * 2];
+    }
+
     // -----------------------------------Cpp-----------------------------------//
     //
     //
@@ -1442,14 +1459,12 @@ public:
         }
         return sum;
     }
-};
 
-/**
- * 使用方法：
- * NeighborSum* obj = new NeighborSum(grid);
- * int adjSum = obj->adjacentSum(value);
- * int diagSum = obj->diagonalSum(value);
- */
+    //    使用方法：
+    //    NeighborSum* obj = new NeighborSum(grid);
+    //    int adjSum = obj->adjacentSum(value);
+    //    int diagSum = obj->diagonalSum(value);
+};
 
 // -----------------------------------------C++--------------------------------------//
 
