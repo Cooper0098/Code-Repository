@@ -1,31 +1,84 @@
-#include <iostream> // 输入输出 cin/cout
-#include <cstdio>   // 输入输出 printf/scanf
-//------------------------------------------//
-#include <algorithm>     // 算法, 用于操作容器, 可以用于排序、查找、修改和管理数据
+#pragma GCC optimize("O2")
+
+#include <bits/stdc++.h>
+#include <iostream> // cin/cout
+#include <cstdio>   // printf/scanf
+#include <algorithm>
 #include <vector>        // 容器
 #include <string>        // 字符串
-#include <stack>         // 栈, 后进先出
-#include <queue>         // 队列, 先进先出
-#include <unordered_map> // 哈希表, 存储的是键值对. 每个元素由一个键和一个与之关联的值组成, 键是唯一的, 但值可以重复. 适合用于需要根据键快速查找值的场景
-#include <unordered_set> // 哈希表,存储的是唯一元素的集合. 每个元素都是值, 不关联任何其他数据. 适合用于需要存储不重复的元素的场景
-//------------------------------------------//
-#include <memory> // 智能指针
+#include <stack>         // 栈
+#include <queue>         // 队列
+#include <unordered_map> // 哈希表
+#include <unordered_set> // 哈希表 set
+#include <memory>        // 智能指针
 #include <functional>
 #include <numeric>
 #include <ranges>
-#include <cstring> // 有memset将一块内存区域设置为特定的值。 strcpy：复制一个字符串。strcat：连接两个字符串。strlen：获取字符串的长度。strcmp：比较两个字符串。
+#include <cstring>
 #include <bitset>
 #include <cmath>
+
 using namespace std;
 
+typedef long long ll;       // long long为ll
+typedef long double ld;     // long doubleld
+typedef pair<int, int> pii; // pair<int, int>pii
+typedef pair<ll, ll> pll;   // pair<ll, ll>pll
+typedef vector<int> vi;     // vector<int>vi
 
-//-------------------------------------------
+const long long inf = numeric_limits<long long>::max(); // 无穷大
+const int N = 100100;                                   // 100 百 , 100100 十万 , 1100100 一百万 , 100100100 一亿
 
+//-------------------------------------------//
 
+class Solution
+{
+public:
+    //---------------------------------------------//
 
+    vector<int> twoSum(vector<int> &nums, int target)
+    {
+        vector<int> ans;
 
+        int n = nums.size();
+
+        unordered_map<int, int> hashmap;
+
+        for (int i = 0; i < n; i++)
+        {
+            hashmap[i] = nums[i];
+        }
+        bool flag = true;
+
+        for (int i = 0; i < n; i++)
+        {
+            int x = target - nums[i];
+            hashmap.erase(i);
+
+            if (flag == true)
+            {
+                for (const auto &pair : hashmap)
+                {
+                    if (pair.second == x)
+                    {
+                        ans.push_back(i);
+                        ans.push_back(pair.first);
+                        flag = false;
+                    }
+                }
+            }
+            hashmap[i] = nums[i];
+        }
+
+        return ans;
+    }
+
+    //-------------------------C++-------------------------//
+};
 
 int main()
 {
     cout << "aaaaaaaaa1111" << endl;
 }
+
+//-----------------------------------------------------------------------------//
