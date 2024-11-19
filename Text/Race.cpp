@@ -1,7 +1,6 @@
 
 
 #pragma GCC optimize("O2")
-
 #include<bits/stdc++.h>
 #include <iostream>      // cin/cout
 #include <cstdio>        // printf/scanf
