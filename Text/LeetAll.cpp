@@ -1385,6 +1385,33 @@ public:
         return nums[r * 2];
     }
 
+    int finalPositionOfSnake(int n, vector<string> &commands)
+    {
+
+        // "UP","RIGHT","DOWN", "LEFT"
+
+        int i = 0, j = 0;
+
+        for (auto &s : commands)
+        {
+            switch (s[0])
+            {
+            case 'U':
+                i--;
+                break;
+            case 'D':
+                i++;
+                break;
+            case 'L':
+                j--;
+                break;
+            default :
+                j++;
+            }
+        }
+        return i * n + j;
+    }
+
     // -----------------------------------Cpp-----------------------------------//
     //
     //
@@ -1479,7 +1506,6 @@ public:
 //
 //
 // -----------------------------------Cpp-----------------------------------//
-
 
 int main()
 {
