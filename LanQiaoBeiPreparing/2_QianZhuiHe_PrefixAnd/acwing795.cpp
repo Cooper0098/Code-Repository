@@ -5,18 +5,17 @@ using namespace std;
 const int N = 100001;
 
 int n, m;
-int arry[N], s[N]; // s是前缀和
 
 int main()
 {
 
+    int arry[N], s[N]; // s是前缀和
     cin >> n >> m;
 
     for (int i = 1; i <= n; i++)
     {
         cin >> arry[i];
     }
-
     for (int i = 1; i <= n; i++)
     {
         s[i] = s[i - 1] + arry[i];

@@ -1,35 +1,18 @@
 #pragma GCC optimize("O2")
-
 #include <bits/stdc++.h>
 #include <iostream> // cin/cout
 #include <cstdio>   // printf/scanf
-#include <algorithm>
-#include <vector>        // 容器
-#include <string>        // 字符串
-#include <stack>         // 栈
-#include <queue>         // 队列
-#include <unordered_map> // 哈希表
-#include <unordered_set> // 哈希表 set
-#include <memory>        // 智能指针
-#include <functional>
-#include <numeric>
-#include <ranges>
-#include <cstring>
-#include <bitset>
-#include <cmath>
 
 using namespace std;
 
-typedef long long ll;       // long long为ll
-typedef long double ld;     // long doubleld
-typedef pair<int, int> pii; // pair<int, int>pii
-typedef pair<ll, ll> pll;   // pair<ll, ll>pll
-typedef vector<int> vi;     // vector<int>vi
+typedef long long ll;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef vector<int> vi;
 
 const long long inf = numeric_limits<long long>::max(); // 无穷大
-const int N = 100100;                                   // 100 百 , 100100 十万 , 1100100 一百万 , 100100100 一亿
-
-//-------------------------------------------//
+const int N = 100100;                                   // 100100 十万 , 1100100 一百万 , 100100100 一亿
 
 class Solution
 {
@@ -38,6 +21,7 @@ public:
 
     vector<int> twoSum(vector<int> &nums, int target)
     {
+        // https://leetcode.cn/problems/two-sum/?envType=study-plan-v2&envId=top-100-liked
         vector<int> ans;
 
         int n = nums.size();
@@ -73,12 +57,54 @@ public:
         return ans;
     }
 
+    vector<vector<string>> groupAnagrams(vector<string> &strs)
+    {
+        // https://leetcode.cn/problems/group-anagrams/description/?envType=study-plan-v2&envId=top-100-liked
+    }
+
     //-------------------------C++-------------------------//
 };
 
 int main()
 {
-    cout << "aaaaaaaaa1111" << endl;
-}
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    //---------优化
 
-//-----------------------------------------------------------------------------//
+    Solution solution;
+
+    //-------------------------------
+
+    // vector<int> nums1 = {2, 7, 11, 15};
+    // int target1 = 9;
+
+    // vector<int> result1 = solution.twoSum(nums1, target1);
+    // cout << "示例 输出: ";
+    // for (int index : result1)
+    // {
+    //     cout << index << " ";
+    // }
+    cout << endl;
+
+    //-------------------------------
+
+
+    //-------------------------------
+
+    //-------------------------------
+
+    //-------------------------------
+
+    //-------------------------------
+
+    //-------------------------------
+
+    //-------------------------------
+
+    //-------------------------------
+
+    //-------------------------------
+
+    return 0;
+}

@@ -1405,11 +1405,30 @@ public:
             case 'L':
                 j--;
                 break;
-            default :
+            default:
                 j++;
             }
         }
         return i * n + j;
+    }
+
+    int winningPlayerCount(int n, vector<vector<int>> &pick)
+    {
+
+        int cnt[10][11]{};
+
+        unordered_set<int> haset;
+
+        for (const auto &p : pick)
+        {
+            int x = p[0], y = p[1];
+            if (++cnt[x][y] > x)
+            {
+                haset.insert(x);
+            }
+        }
+
+        return haset.size();
     }
 
     // -----------------------------------Cpp-----------------------------------//
