@@ -1431,6 +1431,26 @@ public:
         return haset.size();
     }
 
+    int numberOfAlternatingGroups(vector<int> &colors)
+    {
+
+        int ans = 0;
+
+        colors.push_back(colors[0]);
+
+        colors.push_back(colors[1]);
+
+        for (int i = 1; i < colors.size() - 2; i++)
+        {
+            if (colors[i] != colors[i - 1] && colors[i] != colors[i + 1])
+            {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
     // -----------------------------------Cpp-----------------------------------//
     //
     //
