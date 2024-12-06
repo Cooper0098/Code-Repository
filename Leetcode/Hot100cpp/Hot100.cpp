@@ -51,7 +51,7 @@ public:
                     }
                 }
             }
-            
+
             hashmap[i] = nums[i];
         }
 
@@ -62,10 +62,44 @@ public:
     {
         // https://leetcode.cn/problems/group-anagrams/description/?envType=study-plan-v2&envId=top-100-liked
 
-    
+        // https://www.acwing.com/video/1381/
+
+        // 将不同状态的字符串, 变成同一个近似的字符串 来判断
+
+        vector<vector<string>> ans;
+        unordered_map<string, vector<string>> hamap;
+
+        for (auto &x : strs)
+        {
+            string new_str = x;
+
+            sort(new_str.begin(), new_str.end()); // 给字符串排序
+
+            hamap[new_str].push_back(x);
+        }
+
+        for (auto &y : hamap)
+        {
+
+            ans.push_back(y.second); //  y 会引用 hamap 中的一个元素，具体说就是一个 pair<string, vector<string>>
+        }
+        return ans;
     }
 
-    //-------------------------C++-------------------------//
+    int longestConsecutive(vector<int> &nums)
+    {
+        // https://leetcode.cn/problems/longest-consecutive-sequence/description/?envType=study-plan-v2&envId=top-100-liked
+
+        int  ans;
+
+          
+
+        
+        
+        return ans;
+    }
+
+    //---------------C++---------------//
 };
 
 int main()
@@ -75,36 +109,29 @@ int main()
     cout.tie(NULL);
     //---------优化
 
-    Solution solution;
+    Solution solution_USE;
 
     //-------------------------------
 
-    // vector<int> nums1 = {2, 7, 11, 15};
-    // int target1 = 9;
+    // vector<int> tx = {1, 2, 2, 4, 5};
+    // vector<int> ans = solution_USE.twoSum(tx, 4);
 
-    // vector<int> result1 = solution.twoSum(nums1, target1);
-    // cout << "示例 输出: ";
-    // for (int index : result1)
-    // {
-    //     cout << index << " ";
-    // }
+    // for (int &x : ans)
+    //     cout << x << endl;
+
+    cout
+        << endl;
+
+    //-------------------------------
+    cout << (8 - '1' + '0') << endl;
+
+    cout << ('h' - 'a');
+
     cout << endl;
 
     //-------------------------------
 
-    //-------------------------------
-
-    //-------------------------------
-
-    //-------------------------------
-
-    //-------------------------------
-
-    //-------------------------------
-
-    //-------------------------------
-
-    //-------------------------------
+    cout << ' ' << endl;
 
     //-------------------------------
 

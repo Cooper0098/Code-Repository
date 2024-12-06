@@ -14,13 +14,28 @@ typedef vector<int> vi;
 const long long inf = numeric_limits<long long>::max(); // 无穷大
 const int N = 100100;                                   // 100100 十万 , 1100100 一百万 , 100100100 一亿
 
-void Mysolve()
+class Solution
 {
-}
+public:
+    int numRookCaptures(vector<vector<char>> &board)
+    {
+        int ans;
 
-struct Point
-{
-    int x, y;
+        return ans;
+    }
+    
+
+    // ------------------Cpp-------------------//
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
 };
 
 int main()
@@ -29,12 +44,15 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     //---------优化
+    Solution solution_Test;
 
-    Point *p = new Point{10, 20};
-    std::cout << p->x << ", " << p->y << std::endl; // 访问成员
-    delete p;                                       // 记得释放内存
 
-    Mysolve();
+
+    cout << "---------------------" << endl;
+
+    
+
+    cout << "---------------------" << endl;
 
     return 0;
 }

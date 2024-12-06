@@ -1451,17 +1451,70 @@ public:
         return ans;
     }
 
-    // -----------------------------------Cpp-----------------------------------//
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+    bool canAliceWin(vector<int> &nums)
+    {
+
+        bool ans = true;
+
+        int cnt = 0;
+        int all = 0;
+        for (int i = 0; i < nums.size(); i++)
+        {
+
+            if (nums[i] > 9)
+            {
+                cnt += nums[i];
+            }
+            all += nums[i];
+        }
+
+        all = all - cnt;
+
+        if (all == cnt)
+            return false;
+
+        return ans;
+    }
+
+    bool checkTwoChessboards(string coordinate1, string coordinate2)
+    {
+
+        int x1, x2, y1, y2;
+        bool ans = false;
+
+        int arr[8][8] = {};
+
+        x1 = (coordinate1[0] - 'a');
+        x2 = (8 - coordinate1[1] + '0');
+
+        y1 = (coordinate2[0] - 'a');
+        y2 = (8 - coordinate2[1] + '0');
+
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (i % 2 == 0)
+                {
+                    if (j % 2 != 0)
+
+                        arr[i][j] = 1;
+                }
+                else
+                {
+                    if (j % 2 == 0)
+                        arr[i][j] = 1;
+                }
+            }
+        }
+
+        if (arr[x2][x1] == arr[y2][y1])
+            return true;
+
+        return ans;
+    }
+
+
 };
 // -----------------------------------------C++--------------------------------------//
 
