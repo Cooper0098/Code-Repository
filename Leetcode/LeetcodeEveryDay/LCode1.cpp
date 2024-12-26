@@ -130,8 +130,86 @@ public:
         return ans;
     }
 
+    int minSetSize(vector<int> &arr)
+    {
+
+        int ans = 0;
+
+        unordered_map<int, int> hamap;
+
+        for (int i = 0; i < arr.size(); i++)
+        {
+            hamap[arr[i]]++;
+        }
+
+        int n = arr.size();
+
+        vector<int> cnt;
+
+        for (auto x = hamap.begin(); x != hamap.end(); x++)
+        {
+            cnt.push_back(x->second);
+        }
+
+        sort(cnt.begin(), cnt.end());
+
+        int temp = 0;
+        for (int i = hamap.size() - 1; i >= 0; i--)
+        {
+            temp = cnt[i] + temp;
+            ans++;
+            if (temp >= n / 2)
+            {
+                return ans;
+            }
+        }
+
+        return ans;
+    }
+
+    vector<int> stableMountains(vector<int> &height, int threshold)
+    {
+
+        vector<int> ans;
+
+        for (int i = 1; i < height.size(); i++)
+        {
+            if (height[i - 1] > threshold)
+                ans.push_back(i);
+        }
+
+        return ans;
+    }
+
+    bool isSubstringPresent(string s)
+    {
+
+        bool ans = true;
+
+        int n = s.size();
+
+        unordered_set<string> haset;
+
+        for (int i = 1; i < n; i++)
+        {
+            haset.insert(s.substr(i - 1, 2));
+        }
+
+        string rever_s = string(s.rbegin(), s.rend());
+
+        for (int i = 1; i < n; i++)
+        {
+            if (haset.count(rever_s.substr(i - 1, 2)))
+            {
+                return ans;
+            }
+        }
+
+        return false;
+    }
+
     // ------------------Cpp-------------------//
-    //
+    // <-- 600
     //
     //
     //
@@ -157,5 +235,3 @@ int main()
 
     return 0;
 }
-
-// <-- 600
