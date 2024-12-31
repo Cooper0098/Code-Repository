@@ -208,6 +208,26 @@ public:
         return false;
     }
 
+    bool isPossibleToSplit(vector<int> &nums)
+    {
+
+        bool ans = true;
+
+        unordered_map<int, int> hamap;
+
+        for (int i = 0; i < nums.size(); i++)
+        {
+            hamap[nums[i]]++;
+        }
+
+        for (const auto x : hamap)
+        {
+            if (x.second > 2)
+                return false;
+        }
+        return ans;
+    }
+
     // ------------------Cpp-------------------//
     // <-- 600
     //

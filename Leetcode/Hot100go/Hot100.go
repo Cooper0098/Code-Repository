@@ -7,6 +7,21 @@ import (
 	// "time"
 )
 
+// Definition for singly-linked list.
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+// Definition for a binary tree node.
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+/////////////////////////////////////
+
 func twoSum(nums []int, target int) []int {
 	ans := []int{}
 	n := len(nums)
@@ -43,5 +58,3 @@ func main() {
 	fmt.Println("aaaa")
 
 }
-
-
